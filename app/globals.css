@@ -1,0 +1,192 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-manrope);
+  --font-heading: var(--font-playfair);
+  --font-mono: var(--font-geist-mono);
+
+  /* brand palette, exposed as utilities: bg-sand, text-sea-deep, border-driftwood, etc. */
+  --color-sand: var(--sand);
+  --color-sea-deep: var(--sea-deep);
+  --color-olive: var(--olive);
+  --color-warm-white: var(--warm-white);
+  --color-driftwood: var(--driftwood);
+  --color-ocean: var(--ocean);
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  /* raw brand colors, per design brief */
+  --sand: #dcc7a1;
+  --sea-deep: #0b3a53;
+  --olive: #66734a;
+  --warm-white: #faf7f0;
+  --driftwood: #8b6b4a;
+  --ocean: #3e7c8c;
+
+  --background: var(--warm-white);
+  --foreground: var(--sea-deep);
+  --card: #ffffff;
+  --card-foreground: var(--sea-deep);
+  --popover: #ffffff;
+  --popover-foreground: var(--sea-deep);
+  --primary: var(--sea-deep);
+  --primary-foreground: var(--warm-white);
+  --secondary: var(--sand);
+  --secondary-foreground: var(--sea-deep);
+  --muted: color-mix(in srgb, var(--sand) 32%, var(--warm-white));
+  --muted-foreground: color-mix(in srgb, var(--sea-deep) 58%, var(--warm-white));
+  --accent: var(--olive);
+  --accent-foreground: var(--warm-white);
+  --destructive: oklch(0.55 0.19 25);
+  --border: color-mix(in srgb, var(--driftwood) 28%, var(--warm-white));
+  --input: color-mix(in srgb, var(--driftwood) 35%, var(--warm-white));
+  --ring: var(--ocean);
+  --chart-1: var(--ocean);
+  --chart-2: var(--olive);
+  --chart-3: var(--driftwood);
+  --chart-4: var(--sand);
+  --chart-5: var(--sea-deep);
+  --radius: 0.85rem;
+  --sidebar: var(--warm-white);
+  --sidebar-foreground: var(--sea-deep);
+  --sidebar-primary: var(--sea-deep);
+  --sidebar-primary-foreground: var(--warm-white);
+  --sidebar-accent: var(--sand);
+  --sidebar-accent-foreground: var(--sea-deep);
+  --sidebar-border: color-mix(in srgb, var(--driftwood) 28%, var(--warm-white));
+  --sidebar-ring: var(--ocean);
+}
+
+.dark {
+  --background: #071e2c;
+  --foreground: var(--warm-white);
+  --card: #0e2c3f;
+  --card-foreground: var(--warm-white);
+  --popover: #0e2c3f;
+  --popover-foreground: var(--warm-white);
+  --primary: var(--sand);
+  --primary-foreground: var(--sea-deep);
+  --secondary: #123a52;
+  --secondary-foreground: var(--warm-white);
+  --muted: #123a52;
+  --muted-foreground: color-mix(in srgb, var(--warm-white) 65%, var(--sea-deep));
+  --accent: var(--olive);
+  --accent-foreground: var(--warm-white);
+  --destructive: oklch(0.65 0.2 25);
+  --border: color-mix(in srgb, var(--warm-white) 14%, transparent);
+  --input: color-mix(in srgb, var(--warm-white) 18%, transparent);
+  --ring: var(--ocean);
+  --sidebar: #0e2c3f;
+  --sidebar-foreground: var(--warm-white);
+  --sidebar-primary: var(--sand);
+  --sidebar-primary-foreground: var(--sea-deep);
+  --sidebar-accent: #123a52;
+  --sidebar-accent-foreground: var(--warm-white);
+  --sidebar-border: color-mix(in srgb, var(--warm-white) 14%, transparent);
+  --sidebar-ring: var(--ocean);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans scroll-smooth;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading;
+  }
+}
+
+@layer utilities {
+  /* subtle film grain, laid over photography so 26 mismatched phone photos read as one set */
+  .grain-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    background-size: 160px 160px;
+  }
+
+  .vignette-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 45%,
+      color-mix(in srgb, var(--sea-deep) 55%, transparent) 100%
+    );
+  }
+
+  .cinematic-scrim {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-color: var(--sea-deep);
+    mix-blend-mode: multiply;
+    opacity: 0.12;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
