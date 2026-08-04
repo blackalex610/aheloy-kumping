@@ -1,0 +1,447 @@
+- generic [ref=f7e1]:
+  - banner [ref=f7e2]:
+    - navigation [ref=f7e3]:
+      - link "Начало" [ref=f7e4] [cursor=pointer]:
+        - /url: "#hero"
+        - generic [ref=f7e11]:
+          - generic [ref=f7e12]: Къмпинг
+          - generic [ref=f7e13]: Ахелойска Битка
+      - list [ref=f7e730]:
+        - listitem [ref=f7e731]:
+          - link "Начало" [ref=f7e732] [cursor=pointer]:
+            - /url: "#hero"
+        - listitem [ref=f7e733]:
+          - link "За нас" [ref=f7e734] [cursor=pointer]:
+            - /url: "#about"
+        - listitem [ref=f7e735]:
+          - link "Бунгала" [ref=f7e736] [cursor=pointer]:
+            - /url: "#accommodation"
+        - listitem [ref=f7e737]:
+          - link "Къмпинг" [ref=f7e738] [cursor=pointer]:
+            - /url: "#camping"
+        - listitem [ref=f7e739]:
+          - link "Удобства" [ref=f7e740] [cursor=pointer]:
+            - /url: "#amenities"
+        - listitem [ref=f7e741]:
+          - link "Галерия" [ref=f7e742] [cursor=pointer]:
+            - /url: "#gallery"
+        - listitem [ref=f7e743]:
+          - link "Контакти" [ref=f7e744] [cursor=pointer]:
+            - /url: "#contact"
+      - generic [ref=f7e745]:
+        - link "+359 88 999 6156" [ref=f7e746] [cursor=pointer]:
+          - /url: tel:+359889996156
+        - link "Провери свободни дати" [ref=f7e749] [cursor=pointer]:
+          - /url: "#booking"
+  - main [ref=f7e16]:
+    - generic [ref=f7e18]:
+      - generic [ref=f7e19]:
+        - img "Сенчеста тераса на бунгало под клоните на орехово дърво" [ref=f7e883]
+        - img "Хамак и градинска люлка в двора на къмпинга по залез" [ref=f7e887]
+      - generic [ref=f7e25]:
+        - heading [level=1] [ref=f7e26]:
+          - generic "Вашата спокойна почивка край морето" [ref=f7e27]:
+            - generic [ref=f7e28]: Вашата
+            - generic [ref=f7e30]: спокойна
+            - generic [ref=f7e32]: почивка
+            - generic [ref=f7e34]: край
+            - generic [ref=f7e36]: морето
+        - paragraph [ref=f7e39]: Къмпинг Ахелойска Битка предлага уютни бунгала, места за каравани и палатки само на 50 метра от плажа. Перфектното място за семейства, приятели и хора, търсещи спокойствие.
+        - generic [ref=f7e40]:
+          - link "Провери свободни дати" [ref=f7e41] [cursor=pointer]:
+            - /url: "#booking"
+          - link "Свържи се с нас" [ref=f7e42] [cursor=pointer]:
+            - /url: "#contact"
+        - generic [ref=f7e43]:
+          - generic [ref=f7e44]: 50 м от плажа
+          - generic [ref=f7e49]: Сред зеленина и сянка
+          - generic [ref=f7e52]: Семейна атмосфера
+          - generic [ref=f7e58]: Безплатен паркинг
+    - generic [ref=f7e67]:
+      - heading "Всичко необходимо за една истинска морска почивка" [level=2] [ref=f7e69]
+      - generic [ref=f7e70]:
+        - generic [ref=f7e71]:
+          - heading "50 м от плажа" [level=3] [ref=f7e77]
+          - paragraph [ref=f7e78]: Само няколко минути пеша до морето.
+        - generic [ref=f7e79]:
+          - heading "Спокойна природа" [level=3] [ref=f7e83]
+          - paragraph [ref=f7e84]: Бунгалата са разположени сред зеленина и естествена сянка.
+        - generic [ref=f7e85]:
+          - heading "Удобен паркинг" [level=3] [ref=f7e91]
+          - paragraph [ref=f7e92]: Паркинг за автомобили включен в цената.
+        - generic [ref=f7e93]:
+          - heading "Семейна атмосфера" [level=3] [ref=f7e100]
+          - paragraph [ref=f7e101]: Подходящо място за почивка с деца.
+    - generic [ref=f7e103]:
+      - heading "Защо гостите избират Ахелойска Битка?" [level=2] [ref=f7e105]
+      - generic [ref=f7e106]:
+        - generic [ref=f7e107]:
+          - generic [ref=f7e113]: Близо до морето
+          - heading "Само 50 метра до плажа" [level=3] [ref=f7e114]
+          - paragraph [ref=f7e115]: Гостите могат лесно да достигнат морето само за няколко минути.
+        - generic [ref=f7e116]:
+          - generic [ref=f7e120]: Спокойствие сред природата
+          - heading "Сянка от дървета и зеленина" [level=3] [ref=f7e121]
+          - paragraph [ref=f7e122]: Спокойна обстановка, далеч от шума на препълнените курорти.
+        - generic [ref=f7e123]:
+          - generic [ref=f7e130]: Перфектно за семейства
+          - heading "Безопасна и спокойна среда" [level=3] [ref=f7e131]
+          - paragraph [ref=f7e132]: Комфортно място за почивка със семейства и деца.
+        - generic [ref=f7e133]:
+          - generic [ref=f7e139]: Истинско къмпинг преживяване
+          - heading "Каравани, палатки и уютни бунгала" [level=3] [ref=f7e140]
+          - paragraph [ref=f7e141]: Съчетание от традиционен къмпинг и комфортно настаняване.
+    - generic [ref=f7e143]:
+      - generic [ref=f7e144]:
+        - heading "Място за истинска почивка" [level=2] [ref=f7e145]
+        - generic [ref=f7e146]:
+          - paragraph [ref=f7e147]: Къмпинг Ахелойска Битка е спокойно семейно място на Южното Черноморие. Разположен само на няколко крачки от морето, къмпингът предлага уютни бунгала, зелени площи и атмосфера далеч от шума на големите курорти.
+          - paragraph [ref=f7e148]: Благодарение на близостта до плажа, естествената сянка и спокойната атмосфера, мястото е предпочитано от семейства и гости, които искат да избягат от шума на големите курорти.
+      - img "Сенчеста тераса на бунгало под клоните на орехово дърво" [ref=f7e152]
+    - generic [ref=f7e154]:
+      - img "Хамак и градинска люлка в двора на къмпинга по залез" [ref=f7e158]
+      - generic [ref=f7e159]:
+        - heading "Повече от 8 години създаваме летни спомени" [level=2] [ref=f7e160]
+        - paragraph [ref=f7e162]: Къмпингът не е просто място за спане. Той е място, където семействата се връщат всяко лято, раждат се приятелства и се създават летни спомени, които остават за цял живот.
+    - generic [ref=f7e163]:
+      - generic [ref=f7e165]:
+        - heading "Нашите бунгала" [level=2] [ref=f7e166]
+        - paragraph [ref=f7e167]: Изберете настаняването, което пасва на вашето семейство.
+      - generic [ref=f7e169]:
+        - generic [ref=f7e171]:
+          - generic [ref=f7e172]:
+            - img "Покрита веранда на вилата с маса, столове и барбекю" [ref=f7e174]
+            - generic [ref=f7e175]: До 7 човека
+          - generic [ref=f7e176]:
+            - generic [ref=f7e177]:
+              - heading "Вила" [level=3] [ref=f7e178]
+              - paragraph [ref=f7e179]: 160–180 лв./вечер
+            - list [ref=f7e180]:
+              - listitem [ref=f7e181]: 3 спални
+              - listitem [ref=f7e184]: Кухня с печка и хладилник
+              - listitem [ref=f7e187]: Климатик
+              - listitem [ref=f7e190]: Баня и тоалетна
+              - listitem [ref=f7e193]: Кабелна телевизия
+              - listitem [ref=f7e196]: Голяма тераса
+              - listitem [ref=f7e199]: Барбекю
+            - link "Провери свободни дати" [ref=f7e202] [cursor=pointer]:
+              - /url: "#booking"
+        - generic [ref=f7e204]:
+          - generic [ref=f7e205]:
+            - img "Дървена тераса на бунгало, изградена около растящо дърво" [ref=f7e207]
+            - generic [ref=f7e208]: До 2 човека
+          - generic [ref=f7e209]:
+            - generic [ref=f7e210]:
+              - heading "Бунгало Двойка" [level=3] [ref=f7e211]
+              - paragraph [ref=f7e212]: 70 лв./вечер
+            - list [ref=f7e213]:
+              - listitem [ref=f7e214]: Две единични легла
+              - listitem [ref=f7e217]: Баня и тоалетна
+              - listitem [ref=f7e220]: Кухненски кът
+              - listitem [ref=f7e223]: Навес с маса
+              - listitem [ref=f7e226]: Барбекю
+            - link "Провери свободни дати" [ref=f7e229] [cursor=pointer]:
+              - /url: "#booking"
+        - generic [ref=f7e231]:
+          - generic [ref=f7e232]:
+            - img "Тераса на бунгало с прозрачни завеси сред зеленина" [ref=f7e234]
+            - generic [ref=f7e235]: До 3 човека
+          - generic [ref=f7e236]:
+            - generic [ref=f7e237]:
+              - heading "Бунгало Тройка" [level=3] [ref=f7e238]
+              - paragraph [ref=f7e239]: 90 лв./вечер
+            - list [ref=f7e240]:
+              - listitem [ref=f7e241]: Три единични легла
+              - listitem [ref=f7e244]: Кухня
+              - listitem [ref=f7e247]: Баня
+              - listitem [ref=f7e250]: Навес
+              - listitem [ref=f7e253]: Барбекю
+            - link "Провери свободни дати" [ref=f7e256] [cursor=pointer]:
+              - /url: "#booking"
+        - generic [ref=f7e258]:
+          - generic [ref=f7e259]:
+            - img "Дървена тераса със сини завеси и маса за хранене" [ref=f7e261]
+            - generic [ref=f7e262]: До 4 човека
+          - generic [ref=f7e263]:
+            - generic [ref=f7e264]:
+              - heading "Бунгало Четворка" [level=3] [ref=f7e265]
+              - paragraph [ref=f7e266]: 110 лв./вечер
+            - list [ref=f7e267]:
+              - listitem [ref=f7e268]: Четири единични легла
+              - listitem [ref=f7e271]: Кухня
+              - listitem [ref=f7e274]: Баня и тоалетна
+              - listitem [ref=f7e277]: Тераса
+              - listitem [ref=f7e280]: Люлка
+              - listitem [ref=f7e283]: Барбекю
+            - link "Провери свободни дати" [ref=f7e286] [cursor=pointer]:
+              - /url: "#booking"
+    - generic [ref=f7e288]:
+      - generic [ref=f7e289]:
+        - heading "Къмпинг сред природата" [level=2] [ref=f7e290]
+        - paragraph [ref=f7e291]: За любителите на къмпингуването предлагаме спокойни места сред природата с удобен достъп до морето.
+        - list [ref=f7e292]:
+          - listitem [ref=f7e293]: Палатки
+          - listitem [ref=f7e296]: Каравани
+          - listitem [ref=f7e299]: Кемпери
+          - listitem [ref=f7e302]: Електричество
+          - listitem [ref=f7e305]: Санитарни помещения
+          - listitem [ref=f7e308]: Зелени площи
+      - generic [ref=f7e311]:
+        - img "Дървена беседка с маса, столове и барбекю сред дървета" [ref=f7e313]
+        - paragraph [ref=f7e322]: Очакваме снимки от къмпинг зоната
+    - generic [ref=f7e324]:
+      - heading "Удобства" [level=2] [ref=f7e326]
+      - generic [ref=f7e327]:
+        - generic [ref=f7e328]: Паркинг
+        - generic [ref=f7e335]: Wi-Fi
+        - generic [ref=f7e342]: Климатик
+        - generic [ref=f7e358]: Телевизор
+        - generic [ref=f7e364]: Кухня
+        - generic [ref=f7e369]: Хладилник
+        - generic [ref=f7e374]: Микровълнова
+        - generic [ref=f7e380]: Кафе машина
+        - generic [ref=f7e385]: Барбекю
+        - generic [ref=f7e390]: Детски кът
+        - generic [ref=f7e396]: Тенис на маса
+        - generic [ref=f7e402]: Пералня
+        - generic [ref=f7e409]: Домашни любимци
+    - generic [ref=f7e418]:
+      - heading "Галерия" [level=2] [ref=f7e420]
+      - tablist "Категории снимки" [ref=f7e421]:
+        - tab "Всички" [ref=f7e422]
+        - tab "Бунгала" [selected] [ref=f7e423]
+        - tab "Плаж" [ref=f7e424]
+        - tab "Интериор" [ref=f7e425]
+        - tab "Кухня" [ref=f7e426]
+      - generic [ref=f7e427]:
+        - img "Сенчеста тераса на бунгало под клоните на орехово дърво" [ref=f7e433]
+        - img "Хамак и градинска люлка в двора на къмпинга по залез" [ref=f7e436]
+        - img "Дървена тераса със сини завеси и маса за хранене" [ref=f7e439]
+        - img "Покрита веранда на вилата с маса, столове и барбекю" [ref=f7e442]
+        - img "Дървена тераса на бунгало, изградена около растящо дърво" [ref=f7e445]
+        - img "Тераса на бунгало с прозрачни завеси сред зеленина" [ref=f7e448]
+        - img "Полуоткрита тераса с кухненски бокс и мивка" [ref=f7e451]
+        - img "Дървена беседка с маса, столове и барбекю сред дървета" [ref=f7e454]
+      - generic [ref=f7e494]:
+        - link "Виж повече снимки във Facebook" [ref=f7e495] [cursor=pointer]:
+          - /url: https://www.facebook.com/CampingAheloyskaBitka/?locale=bg_BG
+        - link "Провери свободни дати" [ref=f7e496] [cursor=pointer]:
+          - /url: "#booking"
+    - generic [ref=f7e498]:
+      - generic [ref=f7e499]:
+        - paragraph [ref=f7e511]: "4.3"
+        - paragraph [ref=f7e512]:
+          - text: Google рейтинг ·
+          - generic [ref=f7e513]: 205+ мнения
+      - generic [ref=f7e514]:
+        - heading "Отзиви от нашите гости" [level=3] [ref=f7e515]
+        - paragraph [ref=f7e516]: Тук предстои да добавим реални отзиви от гости. Не публикуваме измислени мнения — очаквайте истински впечатления скоро.
+      - link "Виж всички мнения" [ref=f7e518] [cursor=pointer]:
+        - /url: https://www.google.com/maps/search/?api=1&query=%D0%9A%D1%8A%D0%BC%D0%BF%D0%B8%D0%BD%D0%B3%20%D0%90%D1%85%D0%B5%D0%BB%D0%BE%D0%B9%D1%81%D0%BA%D0%B0%20%D0%91%D0%B8%D1%82%D0%BA%D0%B0%2C%20%D0%90%D1%85%D0%B5%D0%BB%D0%BE%D0%B9
+    - generic [ref=f7e520]:
+      - generic [ref=f7e521]:
+        - heading "Перфектна локация" [level=2] [ref=f7e522]
+        - paragraph [ref=f7e523]: Къмпинг Ахелойска Битка се намира на Южното Черноморие, близо до град Ахелой.
+      - generic [ref=f7e524]:
+        - generic [ref=f7e525]:
+          - paragraph [ref=f7e530]:
+            - generic [ref=f7e531]: 50 м
+          - paragraph [ref=f7e532]: Плаж
+        - generic [ref=f7e533]:
+          - paragraph [ref=f7e537]:
+            - generic [ref=f7e538]: 900 м
+          - paragraph [ref=f7e539]: Ахелой
+        - generic [ref=f7e540]:
+          - paragraph [ref=f7e543]:
+            - generic [ref=f7e544]: 6 км
+          - paragraph [ref=f7e545]: Несебър
+        - generic [ref=f7e546]:
+          - paragraph [ref=f7e551]:
+            - generic [ref=f7e552]: 8 км
+          - paragraph [ref=f7e553]: Поморие
+        - generic [ref=f7e554]:
+          - paragraph [ref=f7e561]:
+            - generic [ref=f7e562]: 8 км
+          - paragraph [ref=f7e563]: Слънчев бряг
+        - generic [ref=f7e564]:
+          - paragraph [ref=f7e569]:
+            - generic [ref=f7e570]: 25 км
+          - paragraph [ref=f7e571]: Бургас
+    - generic [ref=f7e573]:
+      - heading "Често задавани въпроси" [level=2] [ref=f7e575]
+      - generic [ref=f7e577]:
+        - heading [level=3] [ref=f7e579]:
+          - button "Кога работи къмпингът?" [ref=f7e580]
+        - heading [level=3] [ref=f7e583]:
+          - button "На колко метра от плажа се намира къмпингът?" [ref=f7e584]
+        - heading [level=3] [ref=f7e587]:
+          - button "Какви типове настаняване предлагате?" [ref=f7e588]
+        - heading [level=3] [ref=f7e591]:
+          - button "Има ли паркинг?" [ref=f7e592]
+        - heading [level=3] [ref=f7e595]:
+          - button "Приемате ли домашни любимци?" [ref=f7e596]
+        - heading [level=3] [ref=f7e599]:
+          - button "Какви са часовете за настаняване и напускане? очаква се" [ref=f7e600]:
+            - generic [ref=f7e601]:
+              - text: Какви са часовете за настаняване и напускане?
+              - generic [ref=f7e602]: очаква се
+        - heading [level=3] [ref=f7e604]:
+          - button "Изисква ли се капаро за резервация? очаква се" [ref=f7e605]:
+            - generic [ref=f7e606]:
+              - text: Изисква ли се капаро за резервация?
+              - generic [ref=f7e607]: очаква се
+        - heading [level=3] [ref=f7e609]:
+          - button "Как мога да проверя свободни дати?" [ref=f7e610]
+    - generic [ref=f7e612]:
+      - generic [ref=f7e613]:
+        - img "Пясъчен плаж и вълни на Черно море близо до къмпинга" [ref=f7e616]
+        - generic [ref=f7e618]:
+          - heading "Готови ли сте за вашата морска почивка?" [level=2] [ref=f7e619]
+          - generic [ref=f7e620]:
+            - link "Обади се сега" [ref=f7e621] [cursor=pointer]:
+              - /url: tel:+359889996156
+            - link "Изпрати запитване" [ref=f7e622] [cursor=pointer]:
+              - /url: "#booking-form"
+      - generic [ref=f7e624]:
+        - generic [ref=f7e625]:
+          - heading "Сезон" [level=3] [ref=f7e630]
+          - generic [ref=f7e631]:
+            - generic [ref=f7e632]: "Работим: Май – Септември"
+            - generic [ref=f7e633]: "Летен сезон: Юни – Август"
+        - generic [ref=f7e634]:
+          - heading "Изпрати запитване" [level=3] [ref=f7e638]
+          - generic [ref=f7e849]:
+            - generic [ref=f7e850]:
+              - generic [ref=f7e851]: Дата на пристигане
+              - button "Дата на пристигане" [ref=f7e852]: Изберете дата
+              - paragraph [ref=f7e888]: Моля изберете дата на пристигане
+            - generic [ref=f7e853]:
+              - generic [ref=f7e854]: Дата на отпътуване
+              - button "Дата на отпътуване" [ref=f7e855]: Изберете дата
+              - paragraph [ref=f7e889]: Моля изберете дата на отпътуване
+            - generic [ref=f7e856]:
+              - generic [ref=f7e857]: Брой гости
+              - spinbutton "Брой гости" [active] [invalid] [ref=f7e858]
+              - paragraph [ref=f7e890]: Моля въведете брой гости
+            - generic [ref=f7e859]:
+              - generic [ref=f7e860]: Тип настаняване
+              - combobox "Тип настаняване" [invalid] [ref=f7e861]:
+                - generic: Изберете тип
+              - combobox [ref=f7e862]
+              - paragraph [ref=f7e891]: Моля изберете тип настаняване
+            - generic [ref=f7e863]:
+              - generic [ref=f7e864]: Име
+              - textbox "Име" [invalid] [ref=f7e865]:
+                - /placeholder: Вашето име
+              - paragraph [ref=f7e892]: Моля въведете вашето име
+            - generic [ref=f7e866]:
+              - generic [ref=f7e867]: Телефон
+              - textbox "Телефон" [invalid] [ref=f7e868]:
+                - /placeholder: +359 88 000 0000
+              - paragraph [ref=f7e893]: Моля въведете валиден телефон
+            - generic [ref=f7e869]:
+              - generic [ref=f7e870]: Email
+              - textbox "Email" [ref=f7e871]:
+                - /placeholder: you@example.com
+            - generic [ref=f7e872]:
+              - generic [ref=f7e873]: Съобщение
+              - textbox "Съобщение" [ref=f7e874]:
+                - /placeholder: Разкажете ни повече за вашето пребиваване...
+            - button "Изпрати запитване" [ref=f7e875]
+    - generic [ref=f7e641]:
+      - generic [ref=f7e642]:
+        - heading "Свържете се с нас" [level=2] [ref=f7e643]
+        - paragraph [ref=f7e644]: Имате въпроси или искате да направите резервация? Свържете се с нас директно.
+      - generic [ref=f7e645]:
+        - generic [ref=f7e646]:
+          - generic [ref=f7e651]:
+            - paragraph [ref=f7e652]: Локация
+            - paragraph [ref=f7e653]: Ахелой, Бургас, България
+          - link [ref=f7e654] [cursor=pointer]:
+            - /url: tel:+359889996156
+            - generic [ref=f7e657]:
+              - paragraph [ref=f7e658]: Телефон
+              - paragraph [ref=f7e659]: +359 88 999 6156
+          - link [ref=f7e660] [cursor=pointer]:
+            - /url: https://www.facebook.com/CampingAheloyskaBitka/?locale=bg_BG
+            - generic [ref=f7e663]:
+              - paragraph [ref=f7e664]: Facebook
+              - paragraph [ref=f7e665]: Camping Aheloyska Bitka
+          - generic [ref=f7e666]:
+            - link "Обади се сега" [ref=f7e667] [cursor=pointer]:
+              - /url: tel:+359889996156
+            - link "Резервирай през Почивка.бг" [ref=f7e668] [cursor=pointer]:
+              - /url: https://pochivka.bg/bungala-aheloyska-bitka-o49671
+        - iframe [ref=f7e670]:
+          - generic [ref=f8e1]:
+            - link "Get directions (opens in new tab)" [ref=f8e101] [cursor=pointer]:
+              - /url: https://www.google.com/maps/dir//''/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x40a69904b9763f5d:0x60951815db124075!3e0?g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAMYASAF
+            - generic [ref=f8e6]:
+              - generic:
+                - button "Keyboard shortcuts"
+              - region "Map" [ref=f8e15]
+              - generic [ref=f8e16]:
+                - iframe [ref=f8e44]:
+                  
+                - button "Map camera controls" [ref=f8e109] [cursor=pointer]
+                - button "Show satellite imagery" [ref=f8e49] [cursor=pointer]:
+                  - generic [ref=f8e53]:
+                    - region [ref=f8e54]
+                    - iframe [ref=f8e60]:
+                      
+                - img "Google" [ref=f8e62]
+                - generic [ref=f8e63]:
+                  - button "Keyboard shortcuts" [ref=f8e69] [cursor=pointer]
+                  - generic [ref=f8e70]: Map data ©2026
+                  - link "Terms (opens in new tab)" [ref=f8e79] [cursor=pointer]:
+                    - /url: https://www.google.com/intl/en-GB_US/help/terms_maps.html
+                    - text: Terms
+                  - link "Report a map error (opens in new tab)" [ref=f8e84] [cursor=pointer]:
+                    - /url: https://www.google.com/maps/@42.6329355,27.6381429,16z/data=!10m1!1e1!12b1?source=apiv3&rapsrc=apiv3
+                    - text: Report a map error
+  - contentinfo [ref=f7e671]:
+    - generic [ref=f7e672]:
+      - generic [ref=f7e673]:
+        - generic [ref=f7e680]:
+          - generic [ref=f7e681]: Къмпинг
+          - generic [ref=f7e682]: Ахелойска Битка
+        - paragraph [ref=f7e683]: Спокойна почивка край морето
+      - generic [ref=f7e684]:
+        - heading "Навигация" [level=3] [ref=f7e685]
+        - list [ref=f7e686]:
+          - listitem [ref=f7e687]:
+            - link "Начало" [ref=f7e688] [cursor=pointer]:
+              - /url: "#hero"
+          - listitem [ref=f7e689]:
+            - link "За нас" [ref=f7e690] [cursor=pointer]:
+              - /url: "#about"
+          - listitem [ref=f7e691]:
+            - link "Бунгала" [ref=f7e692] [cursor=pointer]:
+              - /url: "#accommodation"
+          - listitem [ref=f7e693]:
+            - link "Къмпинг" [ref=f7e694] [cursor=pointer]:
+              - /url: "#camping"
+          - listitem [ref=f7e695]:
+            - link "Удобства" [ref=f7e696] [cursor=pointer]:
+              - /url: "#amenities"
+          - listitem [ref=f7e697]:
+            - link "Галерия" [ref=f7e698] [cursor=pointer]:
+              - /url: "#gallery"
+          - listitem [ref=f7e699]:
+            - link "Контакти" [ref=f7e700] [cursor=pointer]:
+              - /url: "#contact"
+      - generic [ref=f7e701]:
+        - heading "Контакти" [level=3] [ref=f7e702]
+        - list [ref=f7e703]:
+          - listitem [ref=f7e704]: Ахелой, България
+          - listitem [ref=f7e708]:
+            - link "+359 88 999 6156" [ref=f7e709] [cursor=pointer]:
+              - /url: tel:+359889996156
+      - generic [ref=f7e712]:
+        - heading "Последвайте ни" [level=3] [ref=f7e713]
+        - link "Facebook на Къмпинг Ахелойска Битка" [ref=f7e714] [cursor=pointer]:
+          - /url: https://www.facebook.com/CampingAheloyskaBitka/?locale=bg_BG
+    - generic [ref=f7e717]: © 2026 Къмпинг Ахелойска Битка. Всички права запазени.
+  - button "Open Next.js Dev Tools" [ref=f7e726] [cursor=pointer]
+  - alert [ref=f7e751]
+  - region "Notifications alt+T"
