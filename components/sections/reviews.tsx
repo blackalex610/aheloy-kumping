@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { Quote, Star } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { Counter } from "@/components/motion/counter";
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,7 @@ export function Reviews() {
 
   return (
     <section id="reviews" className="bg-warm-white py-24 sm:py-28">
-      <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 text-center lg:px-8">
         <Reveal>
           <div className="flex items-center justify-center gap-1">
             {[1, 2, 3, 4, 5].map((i) => (
@@ -33,12 +33,36 @@ export function Reviews() {
           </p>
         </Reveal>
 
-        <Reveal delay={0.15} className="mt-10 rounded-3xl border-2 border-dashed border-driftwood/30 bg-sand/20 p-10">
-          <h3 className="font-heading text-xl text-sea-deep">{REVIEWS.emptyStateTitle}</h3>
-          <p className="mt-3 text-sm text-driftwood">{REVIEWS.emptyStateText}</p>
-        </Reveal>
+        <div className="mt-14 grid gap-5 text-left sm:grid-cols-2 lg:grid-cols-4">
+          {REVIEWS.list.map((review, i) => (
+            <Reveal
+              key={review.author}
+              delay={(i % 4) * 0.06}
+              className="flex flex-col gap-3 rounded-3xl bg-card p-6 shadow-sm ring-1 ring-driftwood/10"
+            >
+              <Quote className="h-5 w-5 text-olive/50" aria-hidden />
+              <p className="flex-1 text-sm text-driftwood">&ldquo;{review.text}&rdquo;</p>
+              <div className="flex items-center justify-between border-t border-driftwood/10 pt-3">
+                <div>
+                  <p className="text-sm font-semibold text-sea-deep">{review.author}</p>
+                  <p className="text-xs text-driftwood/70">
+                    {review.source} · {review.timeLabel}
+                  </p>
+                </div>
+                <div className="flex gap-0.5">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <Star
+                      key={i}
+                      className={cn("h-3.5 w-3.5", i <= review.rating ? "fill-olive text-olive" : "text-driftwood/25")}
+                    />
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
 
-        <Reveal delay={0.25} className="mt-8">
+        <Reveal delay={0.25} className="mt-10">
           <Button
             asChild
             variant="outline"
