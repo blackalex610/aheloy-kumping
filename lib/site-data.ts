@@ -120,16 +120,26 @@ export interface AccommodationUnit {
   capacity: string;
   priceLabel: string;
   imageSlug: string;
+  description: string;
   features: string[];
+  /** true when imageSlug is a generic camping photo, not a real photo of this exact unit */
+  isPlaceholderImage?: boolean;
 }
+
+export const ACCOMMODATION_SECTION = {
+  title: "Нашите предложения за настаняване",
+  subtitle: "Изберете настаняването, което пасва на вашето семейство.",
+} as const;
 
 export const ACCOMMODATION: AccommodationUnit[] = [
   {
     slug: "vila",
     name: "Вила",
     capacity: "До 7 човека",
-    priceLabel: "160–180 лв./вечер",
-    imageSlug: "villa-porch-bbq",
+    priceLabel: "102.25 €/вечер",
+    imageSlug: "villa7-porch-swing",
+    description:
+      "Просторна вила за до 7 човека с три спални, климатик и голяма тераса с барбекю — идеална за по-голямо семейство или компания приятели.",
     features: [
       "3 спални",
       "Кухня с печка и хладилник",
@@ -141,28 +151,78 @@ export const ACCOMMODATION: AccommodationUnit[] = [
     ],
   },
   {
-    slug: "bungalo-dvoika",
-    name: "Бунгало Двойка",
-    capacity: "До 2 човека",
-    priceLabel: "70 лв./вечер",
-    imageSlug: "bungalow-tree-deck",
-    features: ["Две единични легла", "Баня и тоалетна", "Кухненски кът", "Навес с маса", "Барбекю"],
+    slug: "bungalo-dvustaen-morski-briz",
+    name: "Бунгало „Морски бриз“",
+    capacity: "До 4 човека",
+    priceLabel: "76.69 €/вечер",
+    imageSlug: "briz-exterior",
+    description:
+      "Двустайно бунгало за до 4 човека с климатик и закрита тераса за отдих — уютно място за семейство с деца.",
+    features: [
+      "Две спални с двойни легла",
+      "Оборудвана кухня с печка и хладилник",
+      "Климатик",
+      "Баня с душ и тоалетна",
+      "Закрита тераса за отдих",
+    ],
+  },
+  {
+    slug: "bungalo-dvustaen-lyatna-pauza",
+    name: "Бунгало „Лятна пауза“",
+    capacity: "До 4 човека",
+    priceLabel: "76.69 €/вечер",
+    imageSlug: "pauza-exterior",
+    description:
+      "Двустайно бунгало за до 4 човека с отделна спалня с единични легла — практично решение за семейство или компания приятели.",
+    features: [
+      "Спалня с двойно легло",
+      "Спалня с единични легла",
+      "Оборудвана кухня с печка и хладилник",
+      "Климатик",
+      "Баня с душ и тоалетна",
+    ],
+  },
+  {
+    slug: "bungalo-chetvorka-ednostaen",
+    name: "Бунгало за четирима, едностайно",
+    capacity: "До 4 човека",
+    priceLabel: "61.35 €/вечер",
+    imageSlug: "terrace-blue-curtains",
+    description:
+      "Едностайно бунгало за до 4 човека с тераса, люлка и барбекю — просто и функционално настаняване на добра цена.",
+    features: ["Четири единични легла", "Кухня", "Баня и тоалетна", "Тераса", "Люлка", "Барбекю"],
+    isPlaceholderImage: true,
   },
   {
     slug: "bungalo-troika",
-    name: "Бунгало Тройка",
+    name: "Бунгало за трима",
     capacity: "До 3 човека",
-    priceLabel: "90 лв./вечер",
-    imageSlug: "bungalow-mint-curtains",
-    features: ["Три единични легла", "Кухня", "Баня", "Навес", "Барбекю"],
+    priceLabel: "51.12 €/вечер",
+    imageSlug: "troika-terrace-kitchenette",
+    description:
+      "Бунгало за до 3 човека със сенчеста тераса и кухненски бокс — компактно и удобно за по-малка компания.",
+    features: ["Легла за трима", "Кухненски бокс на терасата", "Баня с душ", "Сенчеста тераса", "Барбекю"],
   },
   {
-    slug: "bungalo-chetvorka",
-    name: "Бунгало Четворка",
-    capacity: "До 4 човека",
-    priceLabel: "110 лв./вечер",
-    imageSlug: "terrace-blue-curtains",
-    features: ["Четири единични легла", "Кухня", "Баня и тоалетна", "Тераса", "Люлка", "Барбекю"],
+    slug: "karavana-morska-gledka",
+    name: "Каравана „Морска гледка“",
+    capacity: "До 2 човека",
+    priceLabel: "60 €/вечер",
+    imageSlug: "caravan-seaview-hero",
+    description:
+      "Напълно оборудвана каравана пред морето за до 2 човека, с климатик и покрита тераса за хранене.",
+    features: ["Каравана пред морето", "Климатик", "Баня и тоалетна", "Напълно оборудвана кухня", "Покрита тераса с трапезария"],
+  },
+  {
+    slug: "bungalo-dvoika",
+    name: "Бунгало за двама",
+    capacity: "До 2 човека",
+    priceLabel: "40.90 €/вечер",
+    imageSlug: "bungalow-tree-deck",
+    description:
+      "Компактно бунгало за до 2 човека с кухненски кът и навес с маса — най-достъпният вариант за двойка.",
+    features: ["Две единични легла", "Баня и тоалетна", "Кухненски кът", "Навес с маса", "Барбекю"],
+    isPlaceholderImage: true,
   },
 ];
 
@@ -239,7 +299,7 @@ export const FAQ: FaqItem[] = [
   {
     question: "Какви типове настаняване предлагате?",
     answer:
-      "Предлагаме Вила, три вида бунгала (Двойка, Тройка, Четворка), както и места за палатки и каравани.",
+      "Предлагаме Вила за до 7 човека, двустайни бунгала за четирима („Морски бриз“ и „Лятна пауза“), едностайно бунгало за четирима, бунгало за трима, бунгало за двама, обзаведена каравана „Морска гледка“, както и места за собствени палатки и каравани.",
   },
   {
     question: "Има ли паркинг?",
@@ -278,9 +338,12 @@ export const FOOTER = {
 
 export const ACCOMMODATION_TYPES_FOR_FORM = [
   "Вила",
-  "Бунгало Двойка",
-  "Бунгало Тройка",
-  "Бунгало Четворка",
+  "Бунгало „Морски бриз“",
+  "Бунгало „Лятна пауза“",
+  "Бунгало за четирима, едностайно",
+  "Бунгало за трима",
+  "Бунгало за двама",
+  "Каравана „Морска гледка“",
   "Място за палатка",
   "Място за каравана / кемпер",
 ] as const;
