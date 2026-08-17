@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import { CinematicImage } from "@/components/media/cinematic-image";
 import { Lightbox } from "@/components/media/lightbox";
 import type { SiteImage } from "@/lib/images";
@@ -23,14 +24,16 @@ export function UnitPhotoGrid({ images }: { images: SiteImage[] }) {
         ))}
       </div>
 
-      {openIndex !== null && (
-        <Lightbox
-          images={images}
-          index={openIndex}
-          onIndexChange={setOpenIndex}
-          onClose={() => setOpenIndex(null)}
-        />
-      )}
+      <AnimatePresence>
+        {openIndex !== null && (
+          <Lightbox
+            images={images}
+            index={openIndex}
+            onIndexChange={setOpenIndex}
+            onClose={() => setOpenIndex(null)}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }
