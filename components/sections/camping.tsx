@@ -1,11 +1,11 @@
-import { ImageOff, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { CinematicImage } from "@/components/media/cinematic-image";
 import { getImage } from "@/lib/images";
 import { CAMPING } from "@/lib/site-data";
 
 export function Camping() {
-  const image = getImage(CAMPING.imageSlugs[0]);
+  const [featured, ...rest] = CAMPING.imageSlugs.map((slug) => getImage(slug));
 
   return (
     <section id="camping" className="bg-sand/25 py-24 sm:py-28">
@@ -23,16 +23,23 @@ export function Camping() {
           </ul>
         </Reveal>
 
-        <Reveal delay={0.15} className="grid grid-cols-2 gap-4">
+        <Reveal delay={0.15} className="flex flex-col gap-3">
           <CinematicImage
-            image={image}
-            className="col-span-2 aspect-square rounded-2xl sm:col-span-1"
+            image={featured}
+            className="aspect-[16/10] rounded-2xl"
             hoverZoom
-            sizes="(max-width: 640px) 100vw, 25vw"
+            sizes="(max-width: 1024px) 100vw, 50vw"
           />
-          <div className="col-span-2 flex aspect-square flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-driftwood/40 bg-warm-white/60 p-6 text-center sm:col-span-1">
-            <ImageOff className="h-8 w-8 text-driftwood/60" aria-hidden />
-            <p className="text-sm text-driftwood">{CAMPING.placeholder}</p>
+          <div className="grid grid-cols-3 gap-3 sm:grid-cols-5">
+            {rest.map((img) => (
+              <CinematicImage
+                key={img.slug}
+                image={img}
+                className="aspect-square rounded-2xl"
+                hoverZoom
+                sizes="(max-width: 640px) 33vw, 12vw"
+              />
+            ))}
           </div>
         </Reveal>
       </div>

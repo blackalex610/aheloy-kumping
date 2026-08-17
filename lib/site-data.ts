@@ -231,8 +231,15 @@ export const CAMPING = {
   description:
     "За любителите на къмпингуването предлагаме спокойни места сред природата с удобен достъп до морето.",
   features: ["Палатки", "Каравани", "Кемпери", "Електричество", "Санитарни помещения", "Зелени площи"],
-  imageSlugs: ["terrace-gazebo-bbq"],
-  placeholder: "Очакваме снимки от къмпинг зоната",
+  imageSlugs: [
+    "camping-pitches-overview",
+    "terrace-gazebo-bbq",
+    "camping-caravan-awning",
+    "camping-tent-motorcycle",
+    "camping-tent-pitch-cars",
+    "camping-entrance-gate",
+    "camping-sunset-motorhome",
+  ],
 } as const;
 
 export interface Amenity {

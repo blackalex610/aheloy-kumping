@@ -1,6 +1,6 @@
 import blurData from "@/lib/blur-data.json";
 
-export type ImageCategory = "beach" | "bungalow" | "interior" | "kitchen" | "bathroom";
+export type ImageCategory = "beach" | "bungalow" | "interior" | "kitchen" | "bathroom" | "camping";
 
 export interface SiteImage {
   slug: string;
@@ -340,6 +340,44 @@ const raw: Omit<SiteImage, "blurDataURL" | "src">[] = [
     category: "bathroom",
     objectPosition: "50% 55%",
     unitSlug: "bungalo-dvustaen-morski-briz",
+  },
+
+  // Къмпинг — реални снимки от палатковите/каравана места
+  {
+    slug: "camping-pitches-overview",
+    alt: "Общ изглед на местата за палатки и каравани сред дървета",
+    category: "camping",
+    objectPosition: "50% 50%",
+  },
+  {
+    slug: "camping-caravan-awning",
+    alt: "Каравана с тента за сянка на място сред дърветата",
+    category: "camping",
+    objectPosition: "50% 55%",
+  },
+  {
+    slug: "camping-tent-motorcycle",
+    alt: "Палатка на сенчесто място за къмпинг с мотоциклет и автомобил",
+    category: "camping",
+    objectPosition: "50% 50%",
+  },
+  {
+    slug: "camping-tent-pitch-cars",
+    alt: "Място за палатка сред дървета с паркирани автомобили",
+    category: "camping",
+    objectPosition: "50% 60%",
+  },
+  {
+    slug: "camping-entrance-gate",
+    alt: "Входна порта на къмпинга с ретро къмпер бус",
+    category: "camping",
+    objectPosition: "50% 50%",
+  },
+  {
+    slug: "camping-sunset-motorhome",
+    alt: "Кемпер на залез сред полските треви на къмпинга",
+    category: "camping",
+    objectPosition: "40% 55%",
   },
 ];
 
