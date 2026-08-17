@@ -35,7 +35,7 @@ export default async function UnitPage({ params }: PageProps) {
 
   const gallery = getUnitGallery(unit.slug);
   const heroImage = gallery[0] ?? getImage(unit.imageSlug);
-  const bookingHref = `${CTA.bookingFormHref}?unit=${encodeURIComponent(unit.name)}`;
+  const bookingHref = `/?unit=${encodeURIComponent(unit.name)}#booking`;
 
   return (
     <>

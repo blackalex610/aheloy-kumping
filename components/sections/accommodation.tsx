@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 
 function AccommodationCard({ unit }: { unit: AccommodationUnit }) {
   const image = getImage(unit.imageSlug);
-  const bookingHref = `${CTA.bookingFormHref}?unit=${encodeURIComponent(unit.name)}`;
+  const bookingHref = `/?unit=${encodeURIComponent(unit.name)}#booking`;
 
   return (
     <div className="group relative flex h-full flex-col overflow-hidden rounded-3xl bg-card shadow-sm ring-1 ring-driftwood/10 transition-shadow duration-300 hover:shadow-lg">
