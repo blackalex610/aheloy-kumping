@@ -1,6 +1,3 @@
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-import { StickyMobileCta } from "@/components/layout/sticky-mobile-cta";
 import { Hero } from "@/components/sections/hero";
 import { QuickFacts } from "@/components/sections/quick-facts";
 import { WhyChooseUs } from "@/components/sections/why-choose-us";
@@ -19,25 +16,20 @@ import { ContactMap } from "@/components/sections/contact-map";
 export default function Home() {
   return (
     <>
-      <Navbar />
-      <main className="flex-1">
-        <Hero />
-        <QuickFacts />
-        <WhyChooseUs />
-        <About />
-        <FamilyStory />
-        <Accommodation />
-        <Camping />
-        <Amenities />
-        <Gallery />
-        <Reviews />
-        <Nearby />
-        <Faq />
-        <BookingCta />
-        <ContactMap />
-      </main>
-      <Footer />
-      <StickyMobileCta />
+      <Hero />
+      <QuickFacts />
+      <WhyChooseUs />
+      <About />
+      <FamilyStory />
+      <Accommodation />
+      <Camping />
+      <Amenities />
+      <Gallery />
+      <Reviews />
+      <Nearby />
+      <Faq />
+      <BookingCta />
+      <ContactMap />
     </>
   );
 }

@@ -31,7 +31,7 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <a href="#hero" className="shrink-0" aria-label="Начало">
+        <a href="/#hero" className="shrink-0" aria-label="Начало">
           <Logo light={light} />
         </a>
 
