@@ -40,8 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.vercel
-
 # raw source photo dumps (kept locally, never committed — processed photos live in public/images)
 /bungalo za trima/
 /dvustajno bungalo za chetirima лятна пауза/
