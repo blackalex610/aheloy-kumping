@@ -1,9 +1,11 @@
+import { Suspense } from "react";
 import { Phone, Leaf, CalendarRange } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { Parallax } from "@/components/motion/parallax";
 import { CinematicImage } from "@/components/media/cinematic-image";
 import { Button } from "@/components/ui/button";
 import { InquiryForm } from "@/components/booking/inquiry-form";
+import { InquiryFormContainer } from "@/components/booking/inquiry-form-container";
 import { getImage } from "@/lib/images";
 import { BOOKING_CTA, SEASON, CTA, BUSINESS } from "@/lib/site-data";
 
@@ -64,7 +66,9 @@ export function BookingCta() {
               <CalendarRange className="h-5 w-5 text-olive" />
               <h3 className="font-heading text-xl text-sea-deep">Изпрати запитване</h3>
             </div>
-            <InquiryForm />
+            <Suspense fallback={<InquiryForm />}>
+              <InquiryFormContainer />
+            </Suspense>
           </Reveal>
         </div>
       </div>

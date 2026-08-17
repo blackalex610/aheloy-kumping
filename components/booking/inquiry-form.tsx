@@ -50,7 +50,11 @@ function buildSummaryLines(data: FormValues) {
   ];
 }
 
-export function InquiryForm() {
+interface InquiryFormProps {
+  defaultAccommodationType?: string;
+}
+
+export function InquiryForm({ defaultAccommodationType }: InquiryFormProps = {}) {
   const {
     register,
     handleSubmit,
@@ -62,7 +66,7 @@ export function InquiryForm() {
     resolver: zodResolver(schema),
     defaultValues: {
       guests: "",
-      accommodationType: "",
+      accommodationType: defaultAccommodationType ?? "",
       name: "",
       phone: "",
       email: "",
