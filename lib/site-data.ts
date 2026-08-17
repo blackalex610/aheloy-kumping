@@ -98,6 +98,7 @@ export const ABOUT = {
     "Благодарение на близостта до плажа, естествената сянка и спокойната атмосфера, мястото е предпочитано от семейства и гости, които искат да избягат от шума на големите курорти.",
   ],
   imageSlug: "terrace-dappled-shade",
+  secondaryImageSlug: "bungalow-mint-curtains",
 } as const;
 
 export const FAMILY_STORY = {
