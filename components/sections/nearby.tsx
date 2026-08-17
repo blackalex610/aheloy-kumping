@@ -12,13 +12,13 @@ export function Nearby() {
           <p className="mt-3 text-driftwood">{NEARBY.text}</p>
         </Reveal>
 
-        <div className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
+        <div className="mt-12 grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-6">
           {NEARBY.distances.map((d, i) => {
             const Icon = getIcon(d.icon);
             return (
               <Reveal key={d.label} delay={i * 0.06} className="flex flex-col items-center gap-2 text-center">
-                <Icon className="h-6 w-6 text-olive" />
-                <p className="font-heading text-2xl text-sea-deep">
+                {i === 0 && <Icon className="h-6 w-6 text-olive" />}
+                <p className="font-heading text-3xl text-sea-deep sm:text-4xl">
                   <Counter to={d.distance} suffix={` ${d.unit}`} />
                 </p>
                 <p className="text-sm text-driftwood">{d.label}</p>
