@@ -21,21 +21,21 @@ export const BUSINESS = {
 } as const;
 
 export const NAV_LINKS = [
-  { label: "Начало", href: "#hero" },
-  { label: "За нас", href: "#about" },
-  { label: "Бунгала", href: "#accommodation" },
-  { label: "Къмпинг", href: "#camping" },
-  { label: "Удобства", href: "#amenities" },
-  { label: "Галерия", href: "#gallery" },
-  { label: "Контакти", href: "#contact" },
+  { label: "Начало", href: "/#hero" },
+  { label: "За нас", href: "/#about" },
+  { label: "Настаняване", href: "/#accommodation" },
+  { label: "Къмпинг", href: "/#camping" },
+  { label: "Удобства", href: "/#amenities" },
+  { label: "Галерия", href: "/#gallery" },
+  { label: "Контакти", href: "/#contact" },
 ] as const;
 
 export const CTA = {
   primary: "Провери свободни дати",
   secondary: "Свържи се с нас",
   phone: "Обади се сега",
-  bookingFormHref: "#booking",
-  contactHref: "#contact",
+  bookingFormHref: "/#booking",
+  contactHref: "/#contact",
 } as const;
 
 export const HERO = {

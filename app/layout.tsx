@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Playfair_Display, Manrope } from "next/font/google";
 import { SmoothScroll } from "@/components/motion/smooth-scroll";
 import { Toaster } from "@/components/ui/sonner";
+import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
+import { StickyMobileCta } from "@/components/layout/sticky-mobile-cta";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -32,7 +35,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${playfair.variable} ${manrope.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground font-sans">
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <StickyMobileCta />
+        </SmoothScroll>
         <Toaster position="bottom-center" richColors />
       </body>
     </html>

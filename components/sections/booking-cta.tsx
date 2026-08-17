@@ -35,7 +35,7 @@ export function BookingCta() {
               variant="outline"
               className="h-12 border-warm-white/50 bg-warm-white/10 px-8 text-base text-warm-white backdrop-blur-sm hover:bg-warm-white/20"
             >
-              <a href="#booking-form">Изпрати запитване</a>
+              <a href="/#booking-form">Изпрати запитване</a>
             </Button>
           </div>
         </Reveal>
