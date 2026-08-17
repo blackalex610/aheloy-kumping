@@ -265,17 +265,80 @@ export const AMENITIES: Amenity[] = [
   { icon: "PawPrint", label: "Домашни любимци" },
 ];
 
+export interface ReviewItem {
+  author: string;
+  rating: number;
+  source: "Google";
+  timeLabel: string;
+  text: string;
+}
+
 export const REVIEWS = {
   rating: 4.3,
   reviewCount: 205,
   countLabel: "205+ мнения",
   ctaLabel: "Виж всички мнения",
-  emptyStateTitle: "Отзиви от нашите гости",
-  emptyStateText:
-    "Тук предстои да добавим реални отзиви от гости. Не публикуваме измислени мнения — очаквайте истински впечатления скоро.",
+  list: [
+    {
+      author: "Skyi connick",
+      rating: 4,
+      source: "Google",
+      timeLabel: "2 years ago",
+      text: "Great if you're looking for a campsite next to the beach, basic facilities but very clean everyday. The owners are lovely and very welcoming. The campsite has a lot of shade from there trees which gives a pleasant stay.",
+    },
+    {
+      author: "Aleksandra",
+      rating: 4,
+      source: "Google",
+      timeLabel: "4 years ago",
+      text: "The place is really quiet and nice. The buildings are old but toilets and showers are cleaned every day. The owners are really kind. We stayed only for one night with a van and a tent and had a really good night.",
+    },
+    {
+      author: "Fikret Sefiloğlu",
+      rating: 4,
+      source: "Google",
+      timeLabel: "9 years ago",
+      text: "By the sea. Among the fruit trees. Caravan parking places are good. The price is very reasonable. Family business. The family are good people.",
+    },
+    {
+      author: "Valentin Radev",
+      rating: 4,
+      source: "Google",
+      timeLabel: "10 years ago",
+      text: "If you like cozy place away from the city noise just on the sea shore - this is the right place for you.",
+    },
+    {
+      author: "Dawid",
+      rating: 4,
+      source: "Google",
+      timeLabel: "10 years ago",
+      text: "Everything is old but it do its thing. Staff speaks english. You have a lot of shadow for tent and a lot of space for yourself which is nice.",
+    },
+    {
+      author: "Sassa T",
+      rating: 5,
+      source: "Google",
+      timeLabel: "9 years ago",
+      text: "We were in bungalow. Basic accommodation, but very cheap and very kind hosts.",
+    },
+    {
+      author: "Korina Pallikaraki",
+      rating: 5,
+      source: "Google",
+      timeLabel: "a week ago",
+      text: "Cute camping with good shadows. Clean showers and toilets. Very friendly owners.",
+    },
+    {
+      author: "Sinem Öğretmen",
+      rating: 5,
+      source: "Google",
+      timeLabel: "4 weeks ago",
+      text: "We didn't expect it to be this beautiful. If it had fit into our schedule, we would have liked to stay a few more days.",
+    },
+  ] as ReviewItem[],
   /** TODO: replace with the real Google Business profile URL once available */
   googleMapsSearchQuery: "Къмпинг Ахелойска Битка, Ахелой",
-} as const;
+};
 
 export const NEARBY = {
   title: "Перфектна локация",
