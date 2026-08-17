@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel
+
+# raw source photo dumps (kept locally, never committed — processed photos live in public/images)
+/bungalo za trima/
+/dvustajno bungalo za chetirima лятна пауза/
+/karavana morska gledka/
+/вила за седем човека/
+/двустайно бунгало за четирима морски бриз/
+/aheloyska bitka OSHTE SNIMKOV MATERIAL/
