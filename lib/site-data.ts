@@ -246,19 +246,20 @@ export const CAMPING = {
 export interface Amenity {
   icon: string;
   label: string;
+  highlight?: boolean;
 }
 
 export const AMENITIES: Amenity[] = [
-  { icon: "Car", label: "Паркинг" },
-  { icon: "Wifi", label: "Wi-Fi" },
-  { icon: "Snowflake", label: "Климатик" },
+  { icon: "Car", label: "Паркинг", highlight: true },
+  { icon: "Wifi", label: "Wi-Fi", highlight: true },
+  { icon: "Snowflake", label: "Климатик", highlight: true },
+  { icon: "Flame", label: "Барбекю", highlight: true },
+  { icon: "Baby", label: "Детски кът", highlight: true },
   { icon: "Tv", label: "Телевизор" },
   { icon: "ChefHat", label: "Кухня" },
   { icon: "Refrigerator", label: "Хладилник" },
   { icon: "Microwave", label: "Микровълнова" },
   { icon: "Coffee", label: "Кафе машина" },
-  { icon: "Flame", label: "Барбекю" },
-  { icon: "Baby", label: "Детски кът" },
   { icon: "CircleDot", label: "Тенис на маса" },
   { icon: "WashingMachine", label: "Пералня" },
   { icon: "PawPrint", label: "Домашни любимци" },
