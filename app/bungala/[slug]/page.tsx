@@ -93,7 +93,7 @@ export default async function UnitPage({ params }: PageProps) {
         </Reveal>
       </section>
 
-      {gallery.length > 0 && (
+      {gallery.length > 1 && (
         <section className="mx-auto max-w-6xl px-6 pb-16 lg:px-8">
           <Reveal>
             <UnitPhotoGrid images={gallery} />
