@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "@/components/motion/reveal";
 import { CinematicImage } from "@/components/media/cinematic-image";
@@ -9,9 +9,73 @@ import { BUSINESS, CTA } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
+const PAGE_SIZE = 12;
+
+function Pagination({
+  totalPages,
+  currentPage,
+  onPageChange,
+  className = "",
+}: {
+  totalPages: number;
+  currentPage: number;
+  onPageChange: (page: number) => void;
+  className?: string;
+}) {
+  if (totalPages <= 1) return null;
+
+  return (
+    <nav aria-label="Gallery pagination" className={cn("flex flex-col items-center gap-3", className)}>
+      <div className="flex items-center justify-center gap-1">
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          <button
+            key={page}
+            type="button"
+            onClick={() => onPageChange(page)}
+            aria-label={`Page ${page}`}
+            aria-current={page === currentPage ? "page" : undefined}
+            className={cn(
+              "w-10 h-10 rounded-lg text-sm font-medium transition-all",
+              page === currentPage
+                ? "bg-sea-deep text-warm-white shadow-sm"
+                : "bg-warm-white text-sea-deep hover:bg-sand/60 hover:text-sea-deep/80"
+            )}
+          >
+            {page}
+          </button>
+        ))}
+      </div>
+      <p className="text-xs text-sea-deep/60 text-center">
+        Страница {currentPage} от {totalPages}
+      </p>
+    </nav>
+  );
+}
+
 export function Gallery() {
   const [active, setActive] = useState<"all" | ImageCategory>("all");
-  const images = active === "all" ? getGalleryImages() : getGalleryImages(active);
+  const [currentPage, setCurrentPage] = useState(1);
+  const allImages = useMemo(
+    () => (active === "all" ? getGalleryImages() : getGalleryImages(active)),
+    [active]
+  );
+  const totalPages = Math.ceil(allImages.length / PAGE_SIZE);
+  const images = useMemo(
+    () => allImages.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE),
+    [allImages, currentPage]
+  );
+
+  const handleTabChange = (value: "all" | ImageCategory) => {
+    setActive(value);
+    setCurrentPage(1);
+  };
+
+  const scrollToBooking = () => {
+    const booking = document.getElementById("booking");
+    if (booking) {
+      booking.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <section id="gallery" className="bg-sand/25 py-24 sm:py-28">
@@ -27,7 +91,7 @@ export function Gallery() {
               type="button"
               role="tab"
               aria-selected={active === cat.value}
-              onClick={() => setActive(cat.value)}
+              onClick={() => handleTabChange(cat.value)}
               className={cn(
                 "rounded-full px-4 py-2 text-sm font-medium transition-colors",
                 active === cat.value
@@ -40,8 +104,15 @@ export function Gallery() {
           ))}
         </div>
 
+        <Pagination
+          totalPages={totalPages}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+          className="mt-6"
+        />
+
         <motion.div layout className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          <AnimatePresence>
+          <AnimatePresence mode="popLayout">
             {images.map((img) => (
               <motion.div
                 key={img.slug}
@@ -51,16 +122,34 @@ export function Gallery() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
               >
-                <CinematicImage
-                  image={img}
-                  className="aspect-[3/4] rounded-2xl"
-                  hoverZoom
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                />
+                <button
+                  type="button"
+                  onClick={scrollToBooking}
+                  className="relative aspect-[3/4] rounded-2xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-sea-deep focus:ring-offset-2 group"
+                  aria-label={`View ${img.alt}`}
+                >
+                  <CinematicImage
+                    image={img}
+                    className="h-full w-full"
+                    hoverZoom
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  />
+                  <span className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden />
+                  <span className="absolute bottom-4 left-4 right-4 text-center text-warm-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    Резервирай
+                  </span>
+                </button>
               </motion.div>
             ))}
           </AnimatePresence>
         </motion.div>
+
+        <Pagination
+          totalPages={totalPages}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+          className="mt-10"
+        />
 
         <Reveal className="mt-12 flex flex-col items-center gap-4">
           <a

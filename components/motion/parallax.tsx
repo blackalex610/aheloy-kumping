@@ -5,6 +5,9 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
 
+// Register GSAP ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
+
 interface ParallaxProps {
   children: ReactNode;
   className?: string;

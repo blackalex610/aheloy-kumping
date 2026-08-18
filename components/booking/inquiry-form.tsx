@@ -14,6 +14,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { DateField } from "@/components/booking/date-field";
 import { ACCOMMODATION_TYPES_FOR_FORM, BUSINESS } from "@/lib/site-data";
 
+const DATES_ENABLED = false;
+
 const schema = z
   .object({
     checkIn: z.date().optional(),
@@ -26,9 +28,9 @@ const schema = z
     message: z.string().optional(),
     honeypot: z.string().optional(),
   })
-  .refine((d) => !!d.checkIn, { message: "Моля изберете дата на пристигане", path: ["checkIn"] })
-  .refine((d) => !!d.checkOut, { message: "Моля изберете дата на отпътуване", path: ["checkOut"] })
-  .refine((d) => !d.checkIn || !d.checkOut || d.checkOut > d.checkIn, {
+  .refine((d) => !DATES_ENABLED || !!d.checkIn, { message: "Моля изберете дата на пристигане", path: ["checkIn"] })
+  .refine((d) => !DATES_ENABLED || !!d.checkOut, { message: "Моля изберете дата на отпътуване", path: ["checkOut"] })
+  .refine((d) => !DATES_ENABLED || !d.checkIn || !d.checkOut || d.checkOut > d.checkIn, {
     message: "Датата на отпътуване трябва да е след датата на пристигане",
     path: ["checkOut"],
   });
@@ -75,7 +77,7 @@ export function InquiryForm({ defaultAccommodationType }: InquiryFormProps = {})
     },
   });
 
-  const checkIn = watch("checkIn");
+  const checkIn = DATES_ENABLED ? watch("checkIn") : undefined;
 
   async function onSubmit(data: FormValues) {
     if (data.honeypot) return; // bot trap — silently drop
@@ -133,33 +135,37 @@ export function InquiryForm({ defaultAccommodationType }: InquiryFormProps = {})
         {...register("honeypot")}
       />
 
-      <Controller
-        control={control}
-        name="checkIn"
-        render={({ field }) => (
-          <DateField
-            id="checkIn"
-            label="Дата на пристигане"
-            value={field.value}
-            onChange={field.onChange}
-            error={errors.checkIn?.message}
+      {DATES_ENABLED && (
+        <>
+          <Controller
+            control={control}
+            name="checkIn"
+            render={({ field }) => (
+              <DateField
+                id="checkIn"
+                label="Дата на пристигане"
+                value={field.value}
+                onChange={field.onChange}
+                error={errors.checkIn?.message}
+              />
+            )}
           />
-        )}
-      />
-      <Controller
-        control={control}
-        name="checkOut"
-        render={({ field }) => (
-          <DateField
-            id="checkOut"
-            label="Дата на отпътуване"
-            value={field.value}
-            onChange={field.onChange}
-            minDate={checkIn}
-            error={errors.checkOut?.message}
+          <Controller
+            control={control}
+            name="checkOut"
+            render={({ field }) => (
+              <DateField
+                id="checkOut"
+                label="Дата на отпътуване"
+                value={field.value}
+                onChange={field.onChange}
+                minDate={checkIn}
+                error={errors.checkOut?.message}
+              />
+            )}
           />
-        )}
-      />
+        </>
+      )}
 
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="guests">Брой гости</Label>
