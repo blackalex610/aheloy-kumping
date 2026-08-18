@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { CinematicImage } from "@/components/media/cinematic-image";
 import { Lightbox } from "@/components/media/lightbox";
@@ -10,70 +11,24 @@ import { BUSINESS, CTA } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
-const PAGE_SIZE = 12;
-
-function Pagination({
-  totalPages,
-  currentPage,
-  onPageChange,
-  className = "",
-}: {
-  totalPages: number;
-  currentPage: number;
-  onPageChange: (page: number) => void;
-  className?: string;
-}) {
-  if (totalPages <= 1) return null;
-
-  return (
-    <nav aria-label="Gallery pagination" className={cn("flex flex-col items-center gap-3", className)}>
-      <div className="flex items-center justify-center gap-1">
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-          <button
-            key={page}
-            type="button"
-            onClick={() => onPageChange(page)}
-            aria-label={`Page ${page}`}
-            aria-current={page === currentPage ? "page" : undefined}
-            className={cn(
-              "w-10 h-10 rounded-lg text-sm font-medium transition-all",
-              page === currentPage
-                ? "bg-sea-deep text-warm-white shadow-sm"
-                : "bg-warm-white text-sea-deep hover:bg-sand/60 hover:text-sea-deep/80"
-            )}
-          >
-            {page}
-          </button>
-        ))}
-      </div>
-      <p className="text-xs text-sea-deep/60 text-center">
-        Страница {currentPage} от {totalPages}
-      </p>
-    </nav>
-  );
-}
-
 export function Gallery() {
   const [active, setActive] = useState<"all" | ImageCategory>("all");
-  const [currentPage, setCurrentPage] = useState(1);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const allImages = useMemo(
+  const trackRef = useRef<HTMLDivElement>(null);
+  const images = useMemo(
     () => (active === "all" ? getGalleryImages() : getGalleryImages(active)),
     [active]
-  );
-  const totalPages = Math.ceil(allImages.length / PAGE_SIZE);
-  const images = useMemo(
-    () => allImages.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE),
-    [allImages, currentPage]
   );
 
   const handleTabChange = (value: "all" | ImageCategory) => {
     setActive(value);
-    setCurrentPage(1);
+    trackRef.current?.scrollTo({ left: 0 });
   };
 
-  const handleImageClick = (index: number) => {
-    setOpenIndex(index);
+  const scrollByAmount = (direction: 1 | -1) => {
+    const track = trackRef.current;
+    if (!track) return;
+    track.scrollBy({ left: direction * track.clientWidth * 0.9, behavior: "smooth" });
   };
 
   return (
@@ -103,41 +58,58 @@ export function Gallery() {
           ))}
         </div>
 
-        <Pagination
-          totalPages={totalPages}
-          currentPage={currentPage}
-          onPageChange={setCurrentPage}
-          className="mt-6"
-        />
+        <div className="relative mt-10">
+          <button
+            type="button"
+            onClick={() => scrollByAmount(-1)}
+            aria-label="Предишни снимки"
+            className="absolute left-0 top-1/2 z-10 hidden h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-warm-white text-sea-deep shadow-md hover:bg-sand/60 sm:flex"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
 
-        <motion.div layout className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          <AnimatePresence mode="popLayout">
-            {images.map((img, i) => (
-              <motion.div
-                key={img.slug}
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4 }}
-              >
-                <button
-                  type="button"
-                  onClick={() => handleImageClick(i)}
-                  className="relative aspect-[3/4] rounded-2xl overflow-hidden group cursor-pointer focus:outline-none focus:ring-2 focus:ring-sea-deep focus:ring-offset-2"
-                  aria-label={`View ${img.alt}`}
+          <div
+            ref={trackRef}
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-1 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            <AnimatePresence mode="popLayout" initial={false}>
+              {images.map((img, i) => (
+                <motion.div
+                  key={img.slug}
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                  className="shrink-0 snap-start"
                 >
-                  <CinematicImage
-                    image={img}
-                    className="h-full w-full"
-                    hoverZoom
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  />
-                </button>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+                  <button
+                    type="button"
+                    onClick={() => setOpenIndex(i)}
+                    className="group relative block h-[300px] w-[225px] overflow-hidden rounded-2xl focus:outline-none focus:ring-2 focus:ring-sea-deep focus:ring-offset-2 sm:h-[360px] sm:w-[270px]"
+                    aria-label={`View ${img.alt}`}
+                  >
+                    <CinematicImage
+                      image={img}
+                      className="h-full w-full"
+                      hoverZoom
+                      sizes="270px"
+                    />
+                  </button>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => scrollByAmount(1)}
+            aria-label="Следващи снимки"
+            className="absolute right-0 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-warm-white text-sea-deep shadow-md hover:bg-sand/60 sm:flex"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
 
         <AnimatePresence>
           {openIndex !== null && (
