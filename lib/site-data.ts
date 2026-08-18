@@ -340,19 +340,6 @@ export const REVIEWS = {
   googleMapsSearchQuery: "Къмпинг Ахелойска Битка, Ахелой",
 };
 
-export const NEARBY = {
-  title: "Перфектна локация",
-  text: "Къмпинг Ахелойска Битка се намира на Южното Черноморие, близо до град Ахелой.",
-  distances: [
-    { icon: "Waves", label: "Плаж", distance: 50, unit: "м" },
-    { icon: "MapPin", label: "Ахелой", distance: 900, unit: "м" },
-    { icon: "Landmark", label: "Несебър", distance: 6, unit: "км" },
-    { icon: "Waves", label: "Поморие", distance: 8, unit: "км" },
-    { icon: "Sun", label: "Слънчев бряг", distance: 8, unit: "км" },
-    { icon: "Building2", label: "Бургас", distance: 25, unit: "км" },
-  ],
-} as const;
-
 export interface FaqItem {
   question: string;
   answer: string;
