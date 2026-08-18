@@ -12,6 +12,9 @@ import { getImage } from "@/lib/images";
 import { ACCOMMODATION, ACCOMMODATION_SECTION, CTA, type AccommodationUnit } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
+// Register GSAP ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
+
 function AccommodationCard({ unit }: { unit: AccommodationUnit }) {
   const image = getImage(unit.imageSlug);
   const bookingHref = `/?unit=${encodeURIComponent(unit.name)}#booking`;

@@ -1,0 +1,120 @@
+- generic [active] [ref=f2e1]:
+  - banner [ref=f2e2]:
+    - navigation [ref=f2e3]:
+      - link "Начало" [ref=f2e4] [cursor=pointer]:
+        - /url: /#hero
+        - generic [ref=f2e11]:
+          - generic [ref=f2e12]: Къмпинг
+          - generic [ref=f2e13]: Ахелойска Битка
+      - list [ref=f2e14]:
+        - listitem [ref=f2e15]:
+          - link "Начало" [ref=f2e16] [cursor=pointer]:
+            - /url: /#hero
+        - listitem [ref=f2e17]:
+          - link "За нас" [ref=f2e18] [cursor=pointer]:
+            - /url: /#about
+        - listitem [ref=f2e19]:
+          - link "Настаняване" [ref=f2e20] [cursor=pointer]:
+            - /url: /#accommodation
+        - listitem [ref=f2e21]:
+          - link "Къмпинг" [ref=f2e22] [cursor=pointer]:
+            - /url: /#camping
+        - listitem [ref=f2e23]:
+          - link "Удобства" [ref=f2e24] [cursor=pointer]:
+            - /url: /#amenities
+        - listitem [ref=f2e25]:
+          - link "Галерия" [ref=f2e26] [cursor=pointer]:
+            - /url: /#gallery
+        - listitem [ref=f2e27]:
+          - link "Контакти" [ref=f2e28] [cursor=pointer]:
+            - /url: /#contact
+      - generic [ref=f2e29]:
+        - link "+359 88 999 6156" [ref=f2e30] [cursor=pointer]:
+          - /url: tel:+359889996156
+        - link "Провери свободни дати" [ref=f2e33] [cursor=pointer]:
+          - /url: /#booking
+  - main [ref=f2e34]:
+    - navigation "Breadcrumb" [ref=f2e35]:
+      - link "Начало" [ref=f2e36] [cursor=pointer]:
+        - /url: /
+      - link "Настаняване" [ref=f2e39] [cursor=pointer]:
+        - /url: /#accommodation
+      - generic [ref=f2e42]: Бунгало за трима
+    - generic [ref=f2e43]:
+      - img "Сенчеста дървена тераса на Бунгало за трима с барбекю и маса" [ref=f2e46]
+      - generic [ref=f2e48]:
+        - heading "Бунгало за трима" [level=1] [ref=f2e49]
+        - generic [ref=f2e50]:
+          - generic [ref=f2e51]: До 3 човека
+          - generic [ref=f2e52]: 51.12 €/вечер
+    - generic [ref=f2e54]:
+      - paragraph [ref=f2e55]: Бунгало за до 3 човека със сенчеста тераса и кухненски бокс — компактно и удобно за по-малка компания.
+      - list [ref=f2e56]:
+        - listitem [ref=f2e57]: Легла за трима
+        - listitem [ref=f2e60]: Кухненски бокс на терасата
+        - listitem [ref=f2e63]: Баня с душ
+        - listitem [ref=f2e66]: Сенчеста тераса
+        - listitem [ref=f2e69]: Барбекю
+    - generic [ref=f2e74]:
+      - button [ref=f2e75]:
+        - img "Сенчеста дървена тераса на Бунгало за трима с барбекю и маса" [ref=f2e77]
+      - button [ref=f2e78]:
+        - img "Кухненски бокс на терасата на Бунгало за трима" [ref=f2e80]
+      - button [ref=f2e81]:
+        - img "Спалня в Бунгало за трима с фототапет на морска пещера" [ref=f2e83]
+      - button [ref=f2e84]:
+        - img "Баня с душ кабина в Бунгало за трима" [ref=f2e86]
+    - generic [ref=f2e88]:
+      - heading "Готови ли сте да резервирате?" [level=2] [ref=f2e89]
+      - generic [ref=f2e90]:
+        - link "Провери свободни дати" [ref=f2e91] [cursor=pointer]:
+          - /url: /?unit=%D0%91%D1%83%D0%BD%D0%B3%D0%B0%D0%BB%D0%BE%20%D0%B7%D0%B0%20%D1%82%D1%80%D0%B8%D0%BC%D0%B0#booking
+        - link "Обади се сега" [ref=f2e92] [cursor=pointer]:
+          - /url: tel:+359889996156
+      - link "← Обратно към всички настанявания" [ref=f2e93] [cursor=pointer]:
+        - /url: /#accommodation
+  - contentinfo [ref=f2e94]:
+    - generic [ref=f2e95]:
+      - generic [ref=f2e96]:
+        - generic [ref=f2e103]:
+          - generic [ref=f2e104]: Къмпинг
+          - generic [ref=f2e105]: Ахелойска Битка
+        - paragraph [ref=f2e106]: Спокойна почивка край морето
+      - generic [ref=f2e107]:
+        - heading "Навигация" [level=3] [ref=f2e108]
+        - list [ref=f2e109]:
+          - listitem [ref=f2e110]:
+            - link "Начало" [ref=f2e111] [cursor=pointer]:
+              - /url: /#hero
+          - listitem [ref=f2e112]:
+            - link "За нас" [ref=f2e113] [cursor=pointer]:
+              - /url: /#about
+          - listitem [ref=f2e114]:
+            - link "Настаняване" [ref=f2e115] [cursor=pointer]:
+              - /url: /#accommodation
+          - listitem [ref=f2e116]:
+            - link "Къмпинг" [ref=f2e117] [cursor=pointer]:
+              - /url: /#camping
+          - listitem [ref=f2e118]:
+            - link "Удобства" [ref=f2e119] [cursor=pointer]:
+              - /url: /#amenities
+          - listitem [ref=f2e120]:
+            - link "Галерия" [ref=f2e121] [cursor=pointer]:
+              - /url: /#gallery
+          - listitem [ref=f2e122]:
+            - link "Контакти" [ref=f2e123] [cursor=pointer]:
+              - /url: /#contact
+      - generic [ref=f2e124]:
+        - heading "Контакти" [level=3] [ref=f2e125]
+        - list [ref=f2e126]:
+          - listitem [ref=f2e127]: Ахелой, България
+          - listitem [ref=f2e131]:
+            - link "+359 88 999 6156" [ref=f2e132] [cursor=pointer]:
+              - /url: tel:+359889996156
+      - generic [ref=f2e135]:
+        - heading "Последвайте ни" [level=3] [ref=f2e136]
+        - link "Facebook на Къмпинг Ахелойска Битка" [ref=f2e137] [cursor=pointer]:
+          - /url: https://www.facebook.com/CampingAheloyskaBitka/?locale=bg_BG
+    - generic [ref=f2e140]: © 2026 Къмпинг Ахелойска Битка. Всички права запазени.
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=f2e146] [cursor=pointer]

@@ -20,15 +20,18 @@ export function Counter({ to, decimals = 0, suffix = "", prefix = "", duration =
   const motionValue = useMotionValue(0);
   const spring = useSpring(motionValue, { duration, bounce: 0 });
   const [display, setDisplay] = useState((0).toFixed(decimals));
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
-    if (!isInView) return;
+    if (!isInView || hasAnimated.current) return;
+    hasAnimated.current = true;
+
     if (reducedMotion) {
-      setDisplay(to.toFixed(decimals));
-      return;
+      motionValue.set(to);
+    } else {
+      motionValue.set(to);
     }
-    motionValue.set(to);
-  }, [isInView, reducedMotion, to, decimals, motionValue]);
+  }, [isInView, reducedMotion, to, motionValue]);
 
   useEffect(() => {
     const unsub = spring.on("change", (v) => setDisplay(v.toFixed(decimals)));
