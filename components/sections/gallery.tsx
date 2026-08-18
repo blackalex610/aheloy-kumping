@@ -35,7 +35,9 @@ export function Gallery() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <Reveal className="text-center">
           <h2 className="font-heading text-3xl text-sea-deep sm:text-4xl">Галерия</h2>
-          <p className="mt-2 text-sm text-sea-deep/60">Плъзни, за да завъртиш — натисни снимка за цял екран</p>
+          <p className="mt-2 text-sm text-sea-deep/60">
+            Плъзни или замахни, за да завъртиш — натисни снимка за цял екран
+          </p>
         </Reveal>
 
         <div role="tablist" aria-label="Категории снимки" className="mt-6 flex flex-wrap justify-center gap-2">
@@ -57,14 +59,18 @@ export function Gallery() {
             </button>
           ))}
         </div>
+      </div>
 
-        <CircularGallery
-          key={active}
-          images={ringImages}
-          onImageClick={(ringIdx) => setOpenIndex(ringIndices[ringIdx])}
-          className="mt-10 h-[300px] sm:h-[340px]"
-        />
+      {/* Full-bleed stage (outside the max-w-7xl column) so the ring has the
+          whole viewport width to spread across on wide screens. */}
+      <CircularGallery
+        key={active}
+        images={ringImages}
+        onImageClick={(ringIdx) => setOpenIndex(ringIndices[ringIdx])}
+        className="mt-10 h-[360px] sm:h-[440px] lg:h-[520px]"
+      />
 
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <AnimatePresence>
           {openIndex !== null && (
             <Lightbox
