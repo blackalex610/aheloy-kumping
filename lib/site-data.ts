@@ -106,7 +106,7 @@ export const FAMILY_STORY = {
   paragraphs: [
     "Къмпингът не е просто място за спане. Той е място, където семействата се връщат всяко лято, раждат се приятелства и се създават летни спомени, които остават за цял живот.",
   ],
-  imageSlug: "hammock-golden-hour",
+  imageSlug: "camping-sunset-motorhome",
 } as const;
 
 export const SEASON = {

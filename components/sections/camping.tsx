@@ -30,7 +30,7 @@ export function Camping() {
         </Reveal>
 
         <Reveal delay={0.1} className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="relative aspect-[4/3] rounded-3xl overflow-hidden">
+          <div className="relative aspect-[4/3] lg:aspect-auto rounded-3xl overflow-hidden">
             <CinematicImage
               image={images[0]}
               className="h-full w-full"
