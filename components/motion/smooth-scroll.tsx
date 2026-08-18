@@ -38,11 +38,13 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     gsap.ticker.lagSmoothing(0);
 
     function onClick(e: MouseEvent) {
-      const target = (e.target as HTMLElement)?.closest('a[href^="#"]');
+      const target = (e.target as HTMLElement)?.closest('a[href^="#"], a[href^="/#"]');
       if (!target) return;
       const href = target.getAttribute("href");
-      if (!href || href === "#") return;
-      const el = document.querySelector(href);
+      if (!href) return;
+      const hash = href.slice(href.indexOf("#"));
+      if (hash === "#") return;
+      const el = document.querySelector(hash);
       if (!el) return;
       e.preventDefault();
       lenis.scrollTo(el as HTMLElement, { offset: NAVBAR_OFFSET, duration: 1.4 });
