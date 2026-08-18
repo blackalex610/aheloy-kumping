@@ -408,7 +408,6 @@ export const GALLERY_CATEGORIES: { label: string; value: ImageCategory | "all" }
   { label: "Плаж", value: "beach" },
   { label: "Интериор", value: "interior" },
   { label: "Кухня", value: "kitchen" },
-  { label: "Баня", value: "bathroom" },
 ];
 
 export function getUnitGallery(unitSlug: string): SiteImage[] {
