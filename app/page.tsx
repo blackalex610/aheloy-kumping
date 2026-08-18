@@ -8,7 +8,6 @@ import { Camping } from "@/components/sections/camping";
 import { Amenities } from "@/components/sections/amenities";
 import { Gallery } from "@/components/sections/gallery";
 import { Reviews } from "@/components/sections/reviews";
-import { Nearby } from "@/components/sections/nearby";
 import { Faq } from "@/components/sections/faq";
 import { BookingCta } from "@/components/sections/booking-cta";
 import { ContactMap } from "@/components/sections/contact-map";
@@ -17,16 +16,15 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <QuickFacts />
-      <WhyChooseUs />
       <About />
+      <WhyChooseUs />
       <FamilyStory />
+      <QuickFacts />
       <Accommodation />
       <Camping />
       <Amenities />
       <Gallery />
       <Reviews />
-      <Nearby />
       <Faq />
       <BookingCta />
       <ContactMap />
