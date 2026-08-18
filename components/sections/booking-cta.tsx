@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import { Phone, Leaf, CalendarRange } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { Parallax } from "@/components/motion/parallax";
@@ -37,7 +38,7 @@ export function BookingCta() {
               variant="outline"
               className="h-12 border-warm-white/50 bg-warm-white/10 px-8 text-base text-warm-white backdrop-blur-sm hover:bg-warm-white/20"
             >
-              <a href="/#booking-form">Изпрати запитване</a>
+              <Link href="/#booking-form">Изпрати запитване</Link>
             </Button>
           </div>
         </Reveal>

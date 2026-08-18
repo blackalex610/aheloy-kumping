@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Menu, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/layout/logo";
@@ -31,9 +32,9 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <a href="/#hero" className="shrink-0" aria-label="Начало">
+        <Link href="/#hero" className="shrink-0" aria-label="Начало">
           <Logo light={light} />
-        </a>
+        </Link>
 
         <ul
           className={cn(
