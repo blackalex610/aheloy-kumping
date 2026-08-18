@@ -10,6 +10,12 @@ import { BUSINESS, CTA } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
+// Max photos the ring shows at once without any of them overlapping or
+// getting clipped. Larger categories are sampled evenly across the full set
+// so the ring stays a curated, uncluttered spread — the fullscreen viewer
+// still arrow-browses every photo in the category, not just these.
+const RING_CAP = 10;
+
 export function Gallery() {
   const [active, setActive] = useState<"all" | ImageCategory>("all");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -17,6 +23,12 @@ export function Gallery() {
     () => (active === "all" ? getGalleryImages() : getGalleryImages(active)),
     [active]
   );
+  const ringIndices = useMemo(() => {
+    if (images.length <= RING_CAP) return images.map((_, i) => i);
+    const stride = images.length / RING_CAP;
+    return Array.from({ length: RING_CAP }, (_, i) => Math.floor(i * stride));
+  }, [images]);
+  const ringImages = useMemo(() => ringIndices.map((i) => images[i]), [ringIndices, images]);
 
   return (
     <section id="gallery" className="bg-sand/25 py-16 sm:py-20">
@@ -48,9 +60,9 @@ export function Gallery() {
 
         <CircularGallery
           key={active}
-          images={images}
-          onImageClick={setOpenIndex}
-          className="mt-10 h-[360px] sm:h-[420px]"
+          images={ringImages}
+          onImageClick={(ringIdx) => setOpenIndex(ringIndices[ringIdx])}
+          className="mt-10 h-[300px] sm:h-[340px]"
         />
 
         <AnimatePresence>
