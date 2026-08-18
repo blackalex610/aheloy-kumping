@@ -32,12 +32,7 @@ function AccommodationCard({ unit }: { unit: AccommodationUnit }) {
         <span className="absolute top-4 left-4 rounded-full bg-warm-white/90 px-3 py-1 text-xs font-semibold text-sea-deep backdrop-blur-sm">
           {unit.capacity}
         </span>
-        {unit.isPlaceholderImage && (
-          <span className="absolute right-4 bottom-4 rounded-full bg-driftwood/80 px-3 py-1 text-xs font-medium text-warm-white backdrop-blur-sm">
-            Илюстративна снимка
-          </span>
-        )}
-      </div>
+              </div>
       <div className="flex flex-1 flex-col gap-4 p-6">
         <div>
           <h3 className="font-heading text-xl text-sea-deep">{unit.name}</h3>

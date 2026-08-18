@@ -121,24 +121,21 @@ export function Gallery() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
+                className="group cursor-pointer"
+                onClick={scrollToBooking}
               >
-                <button
-                  type="button"
-                  onClick={scrollToBooking}
-                  className="relative aspect-[3/4] rounded-2xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-sea-deep focus:ring-offset-2 group"
-                  aria-label={`View ${img.alt}`}
-                >
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
                   <CinematicImage
                     image={img}
                     className="h-full w-full"
                     hoverZoom
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   />
-                  <span className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden />
-                  <span className="absolute bottom-4 left-4 right-4 text-center text-warm-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden />
+                  <div className="absolute bottom-4 left-4 right-4 text-center text-warm-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     Резервирай
-                  </span>
-                </button>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </AnimatePresence>
