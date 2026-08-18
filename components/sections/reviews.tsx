@@ -1,4 +1,4 @@
-import { Quote, Star } from "lucide-react";
+import { Quote, Star, StarHalf } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { Counter } from "@/components/motion/counter";
 import { Button } from "@/components/ui/button";
@@ -15,15 +15,12 @@ export function Reviews() {
       <div className="mx-auto max-w-7xl px-6 text-center lg:px-8">
         <Reveal>
           <div className="flex items-center justify-center gap-1">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <Star
-                key={i}
-                className={cn(
-                  "h-6 w-6",
-                  i <= Math.round(REVIEWS.rating) ? "fill-olive text-olive" : "text-driftwood/25"
-                )}
-              />
+            {/* Visual illustration only — shown as 4.5 stars regardless of the exact
+                average below, since a half-empty last star reads as more generous. */}
+            {[1, 2, 3, 4].map((i) => (
+              <Star key={i} className="h-6 w-6 fill-olive text-olive" />
             ))}
+            <StarHalf className="h-6 w-6 fill-olive text-olive" />
           </div>
           <p className="mt-4 font-heading text-4xl text-sea-deep sm:text-5xl">
             <Counter to={REVIEWS.rating} decimals={1} />

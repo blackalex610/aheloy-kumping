@@ -50,7 +50,7 @@ export function Gallery() {
           key={active}
           images={images}
           onImageClick={setOpenIndex}
-          className="mt-10 h-[340px] sm:h-[400px]"
+          className="mt-10 h-[360px] sm:h-[420px]"
         />
 
         <AnimatePresence>

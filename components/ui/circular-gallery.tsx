@@ -17,7 +17,7 @@ export interface CircularGalleryProps extends React.HTMLAttributes<HTMLDivElemen
 const DRAG_CLICK_THRESHOLD = 6;
 
 export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
-  ({ images, onImageClick, autoRotateSpeed = 0.015, itemWidth = 210, itemHeight = 290, className, ...props }, ref) => {
+  ({ images, onImageClick, autoRotateSpeed = 0.015, itemWidth = 300, itemHeight = 225, className, ...props }, ref) => {
     const [rotation, setRotation] = React.useState(0);
     const rotationRef = React.useRef(0);
     const draggingRef = React.useRef(false);
@@ -47,7 +47,9 @@ export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryP
     // with it too, so translateZ never approaches the projection plane (which is
     // what makes a card blow up to a distorted, screen-filling size).
     const radius = n > 1 ? Math.max((itemWidth / (2 * Math.tan(Math.PI / n))) * 1.3, itemWidth * 0.9) : 0;
-    const perspective = Math.max(1200, radius * 2.4);
+    // A larger multiplier keeps the front card's perspective magnification modest
+    // (~1.45x) instead of a fisheye-style blowup, which reads calmer and more premium.
+    const perspective = Math.max(1200, radius * 3.2);
 
     const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
       draggingRef.current = true;
@@ -71,7 +73,13 @@ export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryP
     };
 
     return (
-      <div className={cn("w-full overflow-hidden", className)}>
+      <div
+        className={cn("w-full overflow-hidden", className)}
+        style={{
+          maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+          WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+        }}
+      >
         <div
           ref={ref}
           role="region"
