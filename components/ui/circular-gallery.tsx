@@ -17,10 +17,11 @@ export interface CircularGalleryProps extends React.HTMLAttributes<HTMLDivElemen
 const DRAG_CLICK_THRESHOLD = 6;
 
 export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
-  ({ images, onImageClick, autoRotateSpeed = 0.05, itemWidth = 210, itemHeight = 290, className, ...props }, ref) => {
+  ({ images, onImageClick, autoRotateSpeed = 0.015, itemWidth = 210, itemHeight = 290, className, ...props }, ref) => {
     const [rotation, setRotation] = React.useState(0);
     const rotationRef = React.useRef(0);
     const draggingRef = React.useRef(false);
+    const hoveringRef = React.useRef(false);
     const startXRef = React.useRef(0);
     const startRotationRef = React.useRef(0);
     const dragDistanceRef = React.useRef(0);
@@ -28,7 +29,7 @@ export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryP
 
     React.useEffect(() => {
       const tick = () => {
-        if (!draggingRef.current) {
+        if (!draggingRef.current && !hoveringRef.current) {
           rotationRef.current += autoRotateSpeed;
           setRotation(rotationRef.current);
         }
@@ -70,59 +71,66 @@ export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryP
     };
 
     return (
-      <div
-        ref={ref}
-        role="region"
-        aria-label="Галерия със снимки — плъзни за въртене"
-        className={cn("relative w-full touch-pan-y select-none overflow-hidden", className)}
-        style={{ perspective }}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerLeave={handlePointerUp}
-        onDragStart={(e) => e.preventDefault()}
-        {...props}
-      >
+      <div className={cn("w-full overflow-hidden", className)}>
         <div
-          className="relative mx-auto h-full w-full cursor-grab active:cursor-grabbing"
-          style={{ transformStyle: "preserve-3d", transform: `rotateY(${rotation}deg)` }}
+          ref={ref}
+          role="region"
+          aria-label="Галерия със снимки — плъзни за въртене, задръж за пауза"
+          className="relative h-full w-full touch-pan-y select-none"
+          style={{ perspective }}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerLeave={handlePointerUp}
+          onMouseEnter={() => {
+            hoveringRef.current = true;
+          }}
+          onMouseLeave={() => {
+            hoveringRef.current = false;
+          }}
+          onDragStart={(e) => e.preventDefault()}
+          {...props}
         >
-          {images.map((img, i) => {
-            const itemAngle = i * anglePerItem;
-            const relativeAngle = (((itemAngle + rotation) % 360) + 360) % 360;
-            const normalizedAngle = relativeAngle > 180 ? 360 - relativeAngle : relativeAngle;
-            const opacity = Math.max(0.35, 1 - normalizedAngle / 180);
+          <div
+            className="relative mx-auto h-full w-full cursor-grab will-change-transform active:cursor-grabbing"
+            style={{ transformStyle: "preserve-3d", transform: `rotateY(${rotation}deg)` }}
+          >
+            {images.map((img, i) => {
+              const itemAngle = i * anglePerItem;
+              const relativeAngle = (((itemAngle + rotation) % 360) + 360) % 360;
+              const normalizedAngle = relativeAngle > 180 ? 360 - relativeAngle : relativeAngle;
+              const opacity = Math.max(0.35, 1 - normalizedAngle / 180);
 
-            return (
-              <button
-                key={img.slug}
-                type="button"
-                onClick={() => {
-                  if (dragDistanceRef.current < DRAG_CLICK_THRESHOLD) onImageClick?.(i);
-                }}
-                aria-label={`View ${img.alt}`}
-                className="absolute overflow-hidden rounded-3xl shadow-xl ring-4 ring-warm-white focus:outline-none focus-visible:ring-sea-deep"
-                style={{
-                  width: itemWidth,
-                  height: itemHeight,
-                  left: "50%",
-                  top: "50%",
-                  marginLeft: -itemWidth / 2,
-                  marginTop: -itemHeight / 2,
-                  transform: `rotateY(${itemAngle}deg) translateZ(${radius}px)`,
-                  opacity,
-                }}
-              >
-                <CinematicImage
-                  image={img}
-                  className="h-full w-full"
-                  imgClassName="pointer-events-none"
-                  hoverZoom
-                  sizes={`${itemWidth}px`}
-                />
-              </button>
-            );
-          })}
+              return (
+                <button
+                  key={img.slug}
+                  type="button"
+                  onClick={() => {
+                    if (dragDistanceRef.current < DRAG_CLICK_THRESHOLD) onImageClick?.(i);
+                  }}
+                  aria-label={`View ${img.alt}`}
+                  className="group absolute overflow-hidden rounded-3xl shadow-xl ring-4 ring-warm-white transition-shadow hover:ring-sea-deep focus:outline-none focus-visible:ring-sea-deep"
+                  style={{
+                    width: itemWidth,
+                    height: itemHeight,
+                    left: "50%",
+                    top: "50%",
+                    marginLeft: -itemWidth / 2,
+                    marginTop: -itemHeight / 2,
+                    transform: `rotateY(${itemAngle}deg) translateZ(${radius}px)`,
+                    opacity,
+                  }}
+                >
+                  <CinematicImage
+                    image={img}
+                    className="h-full w-full"
+                    imgClassName="pointer-events-none"
+                    sizes={`${itemWidth}px`}
+                  />
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     );
