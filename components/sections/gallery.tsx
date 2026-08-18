@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "@/components/motion/reveal";
 import { CinematicImage } from "@/components/media/cinematic-image";
+import { Lightbox } from "@/components/media/lightbox";
 import { getGalleryImages, GALLERY_CATEGORIES, type ImageCategory } from "@/lib/images";
 import { BUSINESS, CTA } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
@@ -55,6 +56,7 @@ function Pagination({
 export function Gallery() {
   const [active, setActive] = useState<"all" | ImageCategory>("all");
   const [currentPage, setCurrentPage] = useState(1);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
   const allImages = useMemo(
     () => (active === "all" ? getGalleryImages() : getGalleryImages(active)),
     [active]
@@ -70,11 +72,8 @@ export function Gallery() {
     setCurrentPage(1);
   };
 
-  const scrollToBooking = () => {
-    const booking = document.getElementById("booking");
-    if (booking) {
-      booking.scrollIntoView({ behavior: "smooth" });
-    }
+  const handleImageClick = (index: number) => {
+    setOpenIndex(index);
   };
 
   return (
@@ -113,7 +112,7 @@ export function Gallery() {
 
         <motion.div layout className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           <AnimatePresence mode="popLayout">
-            {images.map((img) => (
+            {images.map((img, i) => (
               <motion.div
                 key={img.slug}
                 layout
@@ -121,32 +120,35 @@ export function Gallery() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
-                className="group cursor-pointer"
-                onClick={scrollToBooking}
               >
-                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => handleImageClick(i)}
+                  className="relative aspect-[3/4] rounded-2xl overflow-hidden group cursor-pointer focus:outline-none focus:ring-2 focus:ring-sea-deep focus:ring-offset-2"
+                  aria-label={`View ${img.alt}`}
+                >
                   <CinematicImage
                     image={img}
                     className="h-full w-full"
                     hoverZoom
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden />
-                  <div className="absolute bottom-4 left-4 right-4 text-center text-warm-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    Резервирай
-                  </div>
-                </div>
+                </button>
               </motion.div>
             ))}
           </AnimatePresence>
         </motion.div>
 
-        <Pagination
-          totalPages={totalPages}
-          currentPage={currentPage}
-          onPageChange={setCurrentPage}
-          className="mt-10"
-        />
+        <AnimatePresence>
+          {openIndex !== null && (
+            <Lightbox
+              images={images}
+              index={openIndex}
+              onIndexChange={setOpenIndex}
+              onClose={() => setOpenIndex(null)}
+            />
+          )}
+        </AnimatePresence>
 
         <Reveal className="mt-12 flex flex-col items-center gap-4">
           <a
