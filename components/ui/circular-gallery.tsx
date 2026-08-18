@@ -15,9 +15,13 @@ export interface CircularGalleryProps extends React.HTMLAttributes<HTMLDivElemen
 }
 
 const DRAG_CLICK_THRESHOLD = 6;
+/** Hard cap on ring radius so the whole carousel always stays inside its stage
+ * — nothing needs to be clipped or faded out at the edges, no matter how many
+ * images are in the set. Large sets simply sit closer together. */
+const MAX_RADIUS = 460;
 
 export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
-  ({ images, onImageClick, autoRotateSpeed = 0.015, itemWidth = 300, itemHeight = 225, className, ...props }, ref) => {
+  ({ images, onImageClick, autoRotateSpeed = 0.015, itemWidth = 260, itemHeight = 195, className, ...props }, ref) => {
     const [rotation, setRotation] = React.useState(0);
     const rotationRef = React.useRef(0);
     const draggingRef = React.useRef(false);
@@ -25,6 +29,7 @@ export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryP
     const startXRef = React.useRef(0);
     const startRotationRef = React.useRef(0);
     const dragDistanceRef = React.useRef(0);
+    const pointerDownIndexRef = React.useRef<number | null>(null);
     const rafRef = React.useRef<number | null>(null);
 
     React.useEffect(() => {
@@ -43,10 +48,10 @@ export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryP
 
     const n = images.length;
     const anglePerItem = n > 0 ? 360 / n : 0;
-    // Radius grows with item count so neighbors never overlap; perspective scales
-    // with it too, so translateZ never approaches the projection plane (which is
-    // what makes a card blow up to a distorted, screen-filling size).
-    const radius = n > 1 ? Math.max((itemWidth / (2 * Math.tan(Math.PI / n))) * 1.3, itemWidth * 0.9) : 0;
+    const radius =
+      n > 1
+        ? Math.min(Math.max((itemWidth / (2 * Math.tan(Math.PI / n))) * 1.3, itemWidth * 0.9), MAX_RADIUS)
+        : 0;
     // A larger multiplier keeps the front card's perspective magnification modest
     // (~1.45x) instead of a fisheye-style blowup, which reads calmer and more premium.
     const perspective = Math.max(1200, radius * 3.2);
@@ -56,6 +61,8 @@ export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryP
       startXRef.current = e.clientX;
       startRotationRef.current = rotationRef.current;
       dragDistanceRef.current = 0;
+      const target = (e.target as HTMLElement).closest<HTMLElement>("[data-gallery-index]");
+      pointerDownIndexRef.current = target ? Number(target.dataset.galleryIndex) : null;
       e.currentTarget.setPointerCapture(e.pointerId);
     };
 
@@ -70,16 +77,16 @@ export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryP
 
     const handlePointerUp = () => {
       draggingRef.current = false;
+      // Decide click vs. drag ourselves — setPointerCapture (needed for dragging)
+      // can make the browser's native click event unreliable on real trackpads.
+      if (dragDistanceRef.current < DRAG_CLICK_THRESHOLD && pointerDownIndexRef.current !== null) {
+        onImageClick?.(pointerDownIndexRef.current);
+      }
+      pointerDownIndexRef.current = null;
     };
 
     return (
-      <div
-        className={cn("w-full overflow-hidden", className)}
-        style={{
-          maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
-          WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
-        }}
-      >
+      <div className={cn("w-full overflow-hidden", className)}>
         <div
           ref={ref}
           role="region"
@@ -89,7 +96,7 @@ export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryP
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
-          onPointerLeave={handlePointerUp}
+          onPointerCancel={handlePointerUp}
           onMouseEnter={() => {
             hoveringRef.current = true;
           }}
@@ -107,17 +114,19 @@ export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryP
               const itemAngle = i * anglePerItem;
               const relativeAngle = (((itemAngle + rotation) % 360) + 360) % 360;
               const normalizedAngle = relativeAngle > 180 ? 360 - relativeAngle : relativeAngle;
-              const opacity = Math.max(0.35, 1 - normalizedAngle / 180);
+              const opacity = Math.max(0.15, 1 - normalizedAngle / 140);
 
               return (
-                <button
+                <div
                   key={img.slug}
-                  type="button"
-                  onClick={() => {
-                    if (dragDistanceRef.current < DRAG_CLICK_THRESHOLD) onImageClick?.(i);
-                  }}
+                  data-gallery-index={i}
                   aria-label={`View ${img.alt}`}
-                  className="group absolute overflow-hidden rounded-3xl shadow-xl ring-4 ring-warm-white transition-shadow hover:ring-sea-deep focus:outline-none focus-visible:ring-sea-deep"
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") onImageClick?.(i);
+                  }}
+                  className="group absolute cursor-pointer overflow-hidden rounded-3xl shadow-xl ring-4 ring-warm-white transition-shadow hover:ring-sea-deep focus:outline-none focus-visible:ring-sea-deep"
                   style={{
                     width: itemWidth,
                     height: itemHeight,
@@ -135,7 +144,7 @@ export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryP
                     imgClassName="pointer-events-none"
                     sizes={`${itemWidth}px`}
                   />
-                </button>
+                </div>
               );
             })}
           </div>
