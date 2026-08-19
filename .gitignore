@@ -47,3 +47,6 @@ next-env.d.ts
 /вила за седем човека/
 /двустайно бунгало за четирима морски бриз/
 /aheloyska bitka OSHTE SNIMKOV MATERIAL/
+
+# Playwright MCP scratch output
+.playwright-mcp/
