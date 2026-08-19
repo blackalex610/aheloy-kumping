@@ -1,4 +1,4 @@
-import { Quote, Star, StarHalf } from "lucide-react";
+import { Quote, Star } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { Counter } from "@/components/motion/counter";
 import { Button } from "@/components/ui/button";
@@ -20,7 +20,12 @@ export function Reviews() {
             {[1, 2, 3, 4].map((i) => (
               <Star key={i} className="h-6 w-6 fill-olive text-olive" />
             ))}
-            <StarHalf className="h-6 w-6 fill-olive text-olive" />
+            <div className="relative h-6 w-6">
+              <Star className="absolute inset-0 h-6 w-6 text-driftwood/25" />
+              <div className="absolute inset-0 h-6 w-3 overflow-hidden">
+                <Star className="h-6 w-6 fill-olive text-olive" />
+              </div>
+            </div>
           </div>
           <p className="mt-4 font-heading text-4xl text-sea-deep sm:text-5xl">
             <Counter to={REVIEWS.rating} decimals={1} />

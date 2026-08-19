@@ -7,23 +7,59 @@ import { cn } from "@/lib/utils";
 
 export interface CircularGalleryProps extends React.HTMLAttributes<HTMLDivElement> {
   images: SiteImage[];
+  /** Receives the index into `images` (not the ring position). */
   onImageClick?: (index: number) => void;
   /** Degrees added per animation frame while idle. */
   autoRotateSpeed?: number;
 }
 
 const DRAG_CLICK_THRESHOLD = 6;
-/** How much a released "throw" slows down each frame — closer to 1 spins longer. */
-const FRICTION = 0.985;
-const MAX_FLING_SPEED = 14;
+const SPACING = 1.12; // gap between neighboring cards, as a multiple of the minimum non-overlap distance
+const MIN_ITEM_WIDTH = 132;
+const MAX_ITEM_WIDTH = 420;
+const MAX_RING_ITEMS = 10; // keeps the ring curated instead of crowded
+const STAGE_MARGIN = 24; // breathing room between the widest card and the stage edge
+const ASPECT = 0.75; // height / width (4:3)
 
-/** Card size for a given stage width — bigger stages get bigger cards, so the
- * ring visibly grows to fill wide viewports instead of just spacing out more. */
-function sizeForStage(stageWidth: number) {
-  if (stageWidth < 480) return { itemWidth: 190, itemHeight: 143 };
-  if (stageWidth < 768) return { itemWidth: 250, itemHeight: 188 };
-  if (stageWidth < 1200) return { itemWidth: 320, itemHeight: 240 };
-  return { itemWidth: 380, itemHeight: 285 };
+/** Radius, as a multiple of card width, at which `n` tangent cards sit side by
+ * side without their edges touching. */
+const radiusFactor = (n: number) => SPACING / (2 * Math.tan(Math.PI / n));
+
+/** Widest card that lets a ring of `n` fit inside `half` (half the stage). */
+const fitWidth = (half: number, n: number) => half / (radiusFactor(n) + 0.5);
+
+/** Picks the largest ring that still fits the stage at a legible card size, so
+ * narrow screens show fewer, bigger photos instead of a clipped, overlapping pile. */
+function bestCount(stageWidth: number, total: number) {
+  if (total <= 1) return total;
+  const half = stageWidth / 2 - STAGE_MARGIN;
+  for (let n = Math.min(total, MAX_RING_ITEMS); n > 1; n--) {
+    if (fitWidth(half, n) >= MIN_ITEM_WIDTH) return n;
+  }
+  return 1;
+}
+
+/** Evenly spreads `count` picks across `total` items, so a capped ring still
+ * samples the whole category rather than just its first photos. */
+function sampleEvenly(total: number, count: number) {
+  if (total <= count) return Array.from({ length: total }, (_, i) => i);
+  const stride = total / count;
+  return Array.from({ length: count }, (_, i) => Math.floor(i * stride));
+}
+
+/** Derives a card width and ring radius that exactly fit the stage for the
+ * given item count, so neighbors never overlap and the ring never needs to
+ * be clipped — bigger stages get bigger cards and more spacing, together. */
+function sizeForStage(stageWidth: number, n: number) {
+  const half = stageWidth / 2 - STAGE_MARGIN;
+
+  if (n <= 1) {
+    const itemWidth = Math.max(MIN_ITEM_WIDTH, Math.min(MAX_ITEM_WIDTH, stageWidth * 0.4));
+    return { itemWidth, itemHeight: itemWidth * ASPECT, radius: 0 };
+  }
+
+  const itemWidth = Math.max(MIN_ITEM_WIDTH, Math.min(MAX_ITEM_WIDTH, fitWidth(half, n)));
+  return { itemWidth, itemHeight: itemWidth * ASPECT, radius: radiusFactor(n) * itemWidth };
 }
 
 export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
@@ -42,31 +78,30 @@ export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryP
       return () => observer.disconnect();
     }, []);
 
-    const { itemWidth, itemHeight } = sizeForStage(stageWidth);
+    const ringIndices = React.useMemo(
+      () => sampleEvenly(images.length, bestCount(stageWidth, images.length)),
+      [images.length, stageWidth]
+    );
+
+    const n = ringIndices.length;
+    const { itemWidth, itemHeight, radius } = sizeForStage(stageWidth, n);
+    // A larger multiplier keeps the front card's perspective magnification modest
+    // (~1.45x) instead of a fisheye-style blowup, which reads calmer and more premium.
+    const perspective = Math.max(1200, radius * 3.2);
 
     const [rotation, setRotation] = React.useState(0);
     const rotationRef = React.useRef(0);
     const draggingRef = React.useRef(false);
     const hoveringRef = React.useRef(false);
-    const velocityRef = React.useRef(0);
     const startXRef = React.useRef(0);
     const startRotationRef = React.useRef(0);
     const dragDistanceRef = React.useRef(0);
-    const lastMoveTimeRef = React.useRef(0);
-    const lastMoveRotationRef = React.useRef(0);
     const pointerDownIndexRef = React.useRef<number | null>(null);
     const rafRef = React.useRef<number | null>(null);
 
     React.useEffect(() => {
       const tick = () => {
-        if (draggingRef.current || hoveringRef.current) {
-          // paused — leave rotation exactly where it is
-        } else if (Math.abs(velocityRef.current) > 0.03) {
-          rotationRef.current += velocityRef.current;
-          velocityRef.current *= FRICTION;
-          setRotation(rotationRef.current);
-        } else {
-          velocityRef.current = 0;
+        if (!draggingRef.current && !hoveringRef.current) {
           rotationRef.current += autoRotateSpeed;
           setRotation(rotationRef.current);
         }
@@ -78,16 +113,7 @@ export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryP
       };
     }, [autoRotateSpeed]);
 
-    const n = images.length;
     const anglePerItem = n > 0 ? 360 / n : 0;
-    const maxRadius = Math.max(200, stageWidth / 2 - itemWidth / 2 - 24);
-    const radius =
-      n > 1
-        ? Math.min(Math.max((itemWidth / (2 * Math.tan(Math.PI / n))) * 1.3, itemWidth * 0.9), maxRadius)
-        : 0;
-    // A larger multiplier keeps the front card's perspective magnification modest
-    // (~1.45x) instead of a fisheye-style blowup, which reads calmer and more premium.
-    const perspective = Math.max(1200, radius * 3.2);
 
     // Window-level listeners (attached only while a gesture is in progress)
     // instead of setPointerCapture — plays better with trackpads and avoids
@@ -98,12 +124,9 @@ export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryP
       cleanupDragRef.current?.();
 
       draggingRef.current = true;
-      velocityRef.current = 0;
       startXRef.current = e.clientX;
       startRotationRef.current = rotationRef.current;
       dragDistanceRef.current = 0;
-      lastMoveTimeRef.current = performance.now();
-      lastMoveRotationRef.current = rotationRef.current;
       const target = (e.target as HTMLElement).closest<HTMLElement>("[data-gallery-index]");
       pointerDownIndexRef.current = target ? Number(target.dataset.galleryIndex) : null;
 
@@ -113,22 +136,12 @@ export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryP
         const next = startRotationRef.current + dx * 0.3;
         rotationRef.current = next;
         setRotation(next);
-
-        const now = performance.now();
-        const dt = now - lastMoveTimeRef.current;
-        if (dt > 8) {
-          const dRot = next - lastMoveRotationRef.current;
-          velocityRef.current = Math.max(-MAX_FLING_SPEED, Math.min(MAX_FLING_SPEED, (dRot / dt) * 16.67));
-          lastMoveTimeRef.current = now;
-          lastMoveRotationRef.current = next;
-        }
       };
 
       const onUp = () => {
         draggingRef.current = false;
         if (dragDistanceRef.current < DRAG_CLICK_THRESHOLD && pointerDownIndexRef.current !== null) {
           onImageClick?.(pointerDownIndexRef.current);
-          velocityRef.current = 0;
         }
         pointerDownIndexRef.current = null;
         cleanup();
@@ -154,7 +167,7 @@ export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryP
         <div
           ref={ref}
           role="region"
-          aria-label="Галерия със снимки — плъзни или замахни за въртене, задръж снимка за пауза"
+          aria-label="Галерия със снимки — плъзни за въртене, задръж снимка за пауза"
           className="relative h-full w-full touch-pan-y select-none"
           style={{ perspective }}
           onPointerDown={handlePointerDown}
@@ -165,21 +178,25 @@ export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryP
             className="relative mx-auto h-full w-full cursor-grab will-change-transform active:cursor-grabbing"
             style={{ transformStyle: "preserve-3d", transform: `rotateY(${rotation}deg)` }}
           >
-            {images.map((img, i) => {
+            {ringIndices.map((imageIndex, i) => {
+              const img = images[imageIndex];
               const itemAngle = i * anglePerItem;
               const relativeAngle = (((itemAngle + rotation) % 360) + 360) % 360;
               const normalizedAngle = relativeAngle > 180 ? 360 - relativeAngle : relativeAngle;
-              const opacity = Math.max(0.15, 1 - normalizedAngle / 140);
+              // Cards stay fully opaque; depth reads as light falling off toward the
+              // back. Opaque cards also properly hide whatever passes behind them
+              // instead of letting the far side of the ring bleed through.
+              const brightness = 1 - (normalizedAngle / 180) * 0.5;
 
               return (
                 <div
                   key={img.slug}
-                  data-gallery-index={i}
+                  data-gallery-index={imageIndex}
                   aria-label={`View ${img.alt}`}
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") onImageClick?.(i);
+                    if (e.key === "Enter" || e.key === " ") onImageClick?.(imageIndex);
                   }}
                   onMouseEnter={() => {
                     hoveringRef.current = true;
@@ -187,7 +204,7 @@ export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryP
                   onMouseLeave={() => {
                     hoveringRef.current = false;
                   }}
-                  className="group absolute cursor-pointer overflow-hidden rounded-3xl shadow-xl ring-4 ring-warm-white transition-shadow hover:ring-sea-deep focus:outline-none focus-visible:ring-sea-deep"
+                  className="group absolute cursor-pointer overflow-hidden rounded-3xl bg-warm-white shadow-xl ring-4 ring-warm-white transition-shadow hover:ring-sea-deep focus:outline-none focus-visible:ring-sea-deep"
                   style={{
                     width: itemWidth,
                     height: itemHeight,
@@ -196,14 +213,14 @@ export const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryP
                     marginLeft: -itemWidth / 2,
                     marginTop: -itemHeight / 2,
                     transform: `rotateY(${itemAngle}deg) translateZ(${radius}px)`,
-                    opacity,
+                    filter: `brightness(${brightness})`,
                   }}
                 >
                   <CinematicImage
                     image={img}
                     className="h-full w-full"
                     imgClassName="pointer-events-none"
-                    sizes={`${itemWidth}px`}
+                    sizes={`${Math.round(itemWidth)}px`}
                   />
                 </div>
               );
