@@ -51,3 +51,6 @@ next-env.d.ts
 # Playwright MCP scratch output
 .playwright-mcp/
 
+# Root notes other than the README (next dev regenerates some of these)
+/*.md
+!/README.md
